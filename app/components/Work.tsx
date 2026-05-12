@@ -13,20 +13,22 @@ export function Work() {
         year="2026"
         title="KSM Studio"
         tagline="A four-tier agentic system with strict isolation contracts and a multi-pass distillation pipeline."
+        image={{ src: "/work/ksm-studio.png", alt: "KSM Studio — four-tier agent pipeline architecture" }}
         body={
           <>
             <p>
-              {/* AI-DRAFT — edit this. Spec says lead with the architecture story. */}
-              KSM Studio is the agentic system I&apos;ve been building to test
-              the architecture ideas I keep coming back to: four agent tiers
-              with explicit isolation contracts between them, a distillation
-              pipeline that compresses output across passes, and a thin
-              orchestration layer that treats agents as services rather than
-              prompts.
+              KSM Studio is the agentic system I built to test architecture ideas
+              I kept returning to. Four tiers — Triage, Sharpening, Artifacts,
+              Distillation — with explicit isolation contracts at each seam. Triage
+              interviews an idea across six dimensions without ever disclosing its
+              scores. Sharpening grounds the problem in web research before any
+              artifact exists. Artifacts runs four accumulating passes. Distillation
+              renders the public-facing output without exposing the evaluation
+              underneath.
             </p>
             <p>
-              The interesting work isn&apos;t the agents — it&apos;s the seams.
-              The README walks through the contracts and why each tier exists.
+              The int work isn&apos;t the agents — it&apos;s the contracts.
+              The diagram above shows the full pipeline.
             </p>
           </>
         }
@@ -44,6 +46,7 @@ export function Work() {
         year="2025"
         title="Meridian Seven"
         tagline="A daily news digest on a 3D globe — five stories per day, scored by real-world impact, synthesized in a wire-service tone."
+        image={{ src: "/work/meridian-seven.png", alt: "Meridian Seven — 3D globe with story panel open" }}
         body={
           <>
             <p>

@@ -6,25 +6,24 @@ export function Background() {
       </div>
 
       <div className="max-w-[60ch] space-y-5 text-base md:text-lg leading-relaxed">
-        {/* AI-DRAFT — edit this. Spec says condensed history with AI emphasis. */}
         <p>
-          Five years as a Platform PM at a major automotive company, shipping
-          the kind of long-horizon product surfaces — internal APIs, developer
-          tooling, data primitives — that most users never see but every other
-          team depends on. That work is where I learned to ship inside hard
-          constraints and design contracts that hold.
+          Five years at GM, starting as a software developer and ending as the
+          Platform PM for MaxIO — a cloud-native telemetry platform shared across
+          multiple engineering teams. Long-horizon work: internal APIs, onboarding
+          pipelines, developer tooling, the kind of surfaces that don&apos;t get
+          demoed at all-hands but that every other team depends on.
         </p>
         <p>
-          For the last year I&apos;ve gone deep on agentic AI: completed
-          Reforge&apos;s AI PM coursework, built and shipped Meridian Seven on
-          a 3D globe, and started building KSM Studio to test the architecture
-          ideas in production-grade form. Comfortable working at the layer
-          where engineers actually live — LLMs, RAG, tool use, evals, agent
-          orchestration.
+          In December 2024 I left to build. Seventeen months across the U.S.,
+          India, and Southeast Asia — building KSM Studio, running y for a
+          marketplace startup in Hyderabad, studying placemaking across Asia and
+          Europe. The thread across all of it is the same instinct: platform
+          thinking applied to new contexts.
         </p>
         <p>
-          Earlier learning projects (ClearRate and others) sit in the GitHub
-          link below.
+          Technical foundation: LLMs, RAG, multi-agent orchestration,
+          schema-validated pipelines. Reforge AI PM coursework. UT Austin,
+          Mathematics (CS and Entrepreneurship).
         </p>
       </div>
 
