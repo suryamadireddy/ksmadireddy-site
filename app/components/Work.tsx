@@ -46,7 +46,7 @@ export function Work() {
         year="2025"
         title="Meridian Seven"
         tagline="A daily news digest on a 3D globe — five stories per day, scored by real-world impact, synthesized in a wire-service tone."
-        image={{ src: "/work/meridian-seven.png", alt: "Meridian Seven — 3D globe with story panel open" }}
+        embed="https://the-meridian-seven.vercel.app"
         body={
           <>
             <p>

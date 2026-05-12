@@ -6,7 +6,7 @@ import { Contact } from "./components/Contact";
 
 export default function HomePage() {
   return (
-    <main className="mx-auto px-6 md:px-10 lg:px-16 max-w-3xl lg:max-w-4xl">
+    <main className="mx-auto px-6 md:px-10 lg:px-20 max-w-6xl">
       <Hero />
       <Story />
       <Work />

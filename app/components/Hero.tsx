@@ -15,7 +15,7 @@ export function Hero() {
         <span className="italic">design sensibility.</span>
       </h1>
 
-      <div className="flex items-center gap-3 mb-10 md:mb-14">
+      <div className="flex items-center gap-3 mb-10 md:mb-14 max-w-xl">
         <span
           className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--color-fg)]"
           aria-hidden
@@ -27,7 +27,7 @@ export function Hero() {
 
       <a
         href="mailto:ksmadireddy@gmail.com"
-        className="inline-flex items-baseline gap-2 text-lg md:text-xl font-medium underline decoration-[var(--color-border-strong)] decoration-1 underline-offset-[6px] hover:decoration-[var(--color-fg)] transition-[text-decoration-color] duration-200"
+        className="inline-flex items-baseline gap-2 text-lg md:text-xl font-medium underline decoration-[var(--color-border-strong)] decoration-1 underline-offset-[6px] hover:decoration-[var(--color-fg)] transition-[text-decoration-color] duration-200 max-w-xl"
       >
         ksmadireddy@gmail.com
         <span aria-hidden className="text-[var(--color-fg-muted)]">
