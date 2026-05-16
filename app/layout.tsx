@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Instrument_Serif } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { ColorSchemeToggle } from "./components/ColorSchemeToggle";
 import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -10,6 +11,10 @@ const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+};
 
 export const metadata: Metadata = {
   title: "Krishna Surya Madireddy",
@@ -39,7 +44,10 @@ export default function RootLayout({
       lang="en"
       className={`${instrumentSerif.variable} ${GeistSans.variable} ${GeistMono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <ColorSchemeToggle />
+      </body>
     </html>
   );
 }

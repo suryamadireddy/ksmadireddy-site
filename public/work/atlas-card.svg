@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750">
+  <rect width="1200" height="750" fill="#0a0a0a"/>
+  <circle cx="600" cy="380" r="220" fill="none" stroke="#404040" stroke-width="1"/>
+  <ellipse cx="600" cy="380" rx="220" ry="88" fill="none" stroke="#525252" stroke-width="1"/>
+  <line x1="380" y1="380" x2="820" y2="380" stroke="#404040" stroke-width="1"/>
+  <text x="60" y="56" font-family="Georgia, serif" font-size="15" fill="#a3a3a3" letter-spacing="0.04em">Atlas - queryable globe</text>
+</svg>

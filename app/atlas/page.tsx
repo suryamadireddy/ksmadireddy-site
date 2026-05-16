@@ -12,11 +12,25 @@ export const metadata: Metadata = {
 
 export default async function AtlasPage() {
   const filePath = path.join(process.cwd(), "content", "atlas-spec.md");
-  const raw = fs.readFileSync(filePath, "utf-8");
-  const html = await marked.parse(raw);
+  let html = "";
+  try {
+    const raw = fs.readFileSync(filePath, "utf-8");
+    html = await marked.parse(raw);
+  } catch {
+    return (
+      <main className="mx-auto max-w-3xl px-3 py-16 md:px-5 md:py-24 lg:px-8">
+        <p className="text-[var(--color-fg-muted)]">
+          The spec file could not be loaded. If you&apos;re developing locally,
+          ensure{" "}
+          <code className="font-mono text-sm">content/atlas-spec.md</code>{" "}
+          exists.
+        </p>
+      </main>
+    );
+  }
 
   return (
-    <main className="mx-auto px-6 md:px-10 lg:px-16 max-w-3xl py-16 md:py-24">
+    <main className="mx-auto px-3 md:px-5 lg:px-8 max-w-3xl py-16 md:py-24">
       <Link
         href="/"
         className="label inline-flex items-center gap-2 mb-12 md:mb-16 hover:text-[var(--color-fg)] transition-colors"

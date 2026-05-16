@@ -2,100 +2,56 @@ import { WorkCard } from "./WorkCard";
 
 export function Work() {
   return (
-    <section className="py-16 md:py-24 border-t border-[var(--color-border)]">
-      <div className="mb-12 md:mb-16">
-        <span className="label">Featured work</span>
-      </div>
-
+    <section className="py-16 md:py-24">
       <WorkCard
-        index="01"
         status="BUILDING"
-        year="2026"
         title="KSM Studio"
         tagline="A four-tier agentic system with strict isolation contracts and a multi-pass distillation pipeline."
-        image={{ src: "/work/ksm-studio.png", alt: "KSM Studio — four-tier agent pipeline architecture" }}
+        mediaHref="/ksm-studio"
+        image={{
+          src: "/work/ksm-studio.svg",
+          alt: "KSM Studio — four-tier agent pipeline architecture",
+        }}
         body={
-          <>
-            <p>
-              KSM Studio is the agentic system I built to test architecture ideas
-              I kept returning to. Four tiers — Triage, Sharpening, Artifacts,
-              Distillation — with explicit isolation contracts at each seam. Triage
-              interviews an idea across six dimensions without ever disclosing its
-              scores. Sharpening grounds the problem in web research before any
-              artifact exists. Artifacts runs four accumulating passes. Distillation
-              renders the public-facing output without exposing the evaluation
-              underneath.
-            </p>
-            <p>
-              The int work isn&apos;t the agents — it&apos;s the contracts.
-              The diagram above shows the full pipeline.
-            </p>
-          </>
+          <p>
+            An agentic system for testing architecture ideas: explicit contracts
+            between triage, research, multi-pass artifacts, and distillation.
+            Open the diagram for the full breakdown.
+          </p>
         }
-        links={[
-          // TODO: Replace with real Loom URL once recorded.
-          { label: "Watch walkthrough", href: "#", pending: true },
-          // TODO: Replace with public README URL.
-          { label: "Read README", href: "#", pending: true },
-        ]}
       />
 
       <WorkCard
-        index="02"
         status="SHIPPED"
-        year="2025"
         title="Meridian Seven"
         tagline="A daily news digest on a 3D globe — five stories per day, scored by real-world impact, synthesized in a wire-service tone."
         embed="https://the-meridian-seven.vercel.app"
+        interactiveEmbed
         body={
-          <>
-            <p>
-              {/* AI-DRAFT — edit. Spec wants honest framing, no "actively maintained." */}
-              Built and shipped end-to-end: a 3D-globe interface for daily news
-              with five stories scored on real-world impact and synthesized
-              from multiple sources in a neutral, wire-service tone. The
-              architecture pairs a Claude-powered content pipeline with a
-              globe.gl front end backed by Supabase.
-            </p>
-            <p>
-              Frozen at its current state — a shipped artifact, not an ongoing
-              product. Building Meridian and then using it daily was the
-              experience that surfaced what I actually wanted to build next.
-              See Atlas below.
-            </p>
-          </>
+          <p>
+            End-to-end shipped build: globe.gl plus a Claude-powered pipeline
+            and Supabase — five daily stories in a neutral wire-service tone.
+            Frozen as a finished artifact.
+          </p>
         }
-        links={[
-          {
-            label: "Visit the-meridian-seven.vercel.app",
-            href: "https://the-meridian-seven.vercel.app/",
-          },
-        ]}
       />
 
       <WorkCard
-        index="03"
         status="DESIGNING"
-        year="2026"
         title="Atlas"
         tagline="A queryable atlas of how the world works. Natural-language queries route to curated data layers — minerals, historical empires, species ranges — rendered on a globe."
+        mediaHref="/atlas"
+        image={{
+          src: "/work/atlas-card.svg",
+          alt: "Atlas — queryable globe and working spec",
+        }}
         body={
-          <>
-            {/* WRITE THIS YOURSELF — spec says Atlas card needs your voice on the iteration story. */}
-            <p>
-              Atlas is the iteration. I built Meridian, used it, and realized
-              news wasn&apos;t the framing I wanted — a daily feed is a duty,
-              not curiosity. Atlas keeps the globe and the wire-service tone
-              and throws out the rest: it&apos;s evergreen, layer-based, and
-              queryable in natural language.
-            </p>
-            <p>
-              The spec is public. It&apos;s the document I&apos;m building
-              against, not a marketing summary of it.
-            </p>
-          </>
+          <p>
+            The iteration after Meridian: same globe and tone, but evergreen
+            layers instead of a news feed — queryable in natural language. The
+            working spec is public.
+          </p>
         }
-        links={[{ label: "Read the spec", href: "/atlas" }]}
       />
     </section>
   );

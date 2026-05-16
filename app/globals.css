@@ -6,191 +6,206 @@
   --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 
-  /* Color — warm monochrome. Accent reserved for v2. */
-  --color-bg: #faf9f6;
-  --color-bg-elevated: #ffffff;
-  --color-fg: #16161a;
-  --color-fg-muted: #6b6b73;
-  --color-fg-subtle: #a3a3a8;
-  --color-border: #e8e6e0;
-  --color-border-strong: #d4d2cb;
+  /* Color — pure black canvas, light type */
+  --color-bg: #000000;
+  --color-bg-elevated: #0a0a0a;
+  --color-fg: #f5f5f5;
+  --color-fg-muted: #a3a3a3;
+  --color-fg-subtle: #737373;
+  --color-border: #262626;
+  --color-border-strong: #404040;
 }
 
-/* Base */
-:root {
-  color-scheme: light;
-}
+/* Keep custom tokens + resets inside Tailwind layers so cascade stays consistent with utilities. */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
 
-html {
-  background: var(--color-bg);
-  color: var(--color-fg);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
+  /* Manual preview: light palette. ColorSchemeToggle sets `data-color-scheme` on <html>. */
+  html[data-color-scheme="light"] {
+    color-scheme: light;
+    --color-bg: #faf9f6;
+    --color-bg-elevated: #f4f3ef;
+    --color-fg: #16161a;
+    --color-fg-muted: #52525b;
+    --color-fg-subtle: #71717a;
+    --color-border: #e4e4e7;
+    --color-border-strong: #c4c4cc;
+  }
 
-body {
-  font-family: var(--font-sans);
-  font-size: 17px;
-  line-height: 1.6;
-  letter-spacing: -0.005em;
-}
+  html {
+    overflow-x: clip;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
 
-@media (min-width: 768px) {
   body {
-    font-size: 18px;
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.6;
+    letter-spacing: -0.005em;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      font-size: 18px;
+    }
+  }
+
+  ::selection {
+    background: var(--color-fg);
+    color: var(--color-bg);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-fg);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 }
 
-/* Selection */
-::selection {
-  background: var(--color-fg);
-  color: var(--color-bg);
-}
+@layer components {
+  /* Section label — mono, small caps, letterspaced. Used to mark section starts. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+  }
 
-/* Focus ring — subtle, monochrome */
-*:focus-visible {
-  outline: 2px solid var(--color-fg);
-  outline-offset: 3px;
-  border-radius: 2px;
-}
+  /* Display headings — Instrument Serif */
+  .display {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
 
-/* Section label — mono, small caps, letterspaced. Used to mark section starts. */
-.label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-fg-muted);
-}
+  /* Long-form prose for /atlas */
+  .prose {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-fg);
+    max-width: 65ch;
+  }
 
-/* Display headings — Instrument Serif */
-.display {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
-}
+  .prose h1 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
 
-/* Long-form prose for /atlas */
-.prose {
-  font-family: var(--font-sans);
-  font-size: 17px;
-  line-height: 1.65;
-  color: var(--color-fg);
-  max-width: 65ch;
-}
+  .prose h2 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(1.4rem, 3vw, 1.75rem);
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
 
-.prose h1 {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  font-size: clamp(2rem, 5vw, 2.75rem);
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-}
+  .prose h3 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
 
-.prose h2 {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  font-size: clamp(1.4rem, 3vw, 1.75rem);
-  letter-spacing: -0.015em;
-  line-height: 1.2;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--color-border);
-}
+  .prose p {
+    margin: 1rem 0;
+  }
 
-.prose h3 {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
-}
+  .prose strong {
+    font-weight: 600;
+    color: var(--color-fg);
+  }
 
-.prose p {
-  margin: 1rem 0;
-}
+  .prose em {
+    font-style: italic;
+  }
 
-.prose strong {
-  font-weight: 600;
-  color: var(--color-fg);
-}
+  .prose a {
+    color: var(--color-fg);
+    text-decoration: underline;
+    text-decoration-color: var(--color-border-strong);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s ease;
+  }
 
-.prose em {
-  font-style: italic;
-}
+  .prose a:hover {
+    text-decoration-color: var(--color-fg);
+  }
 
-.prose a {
-  color: var(--color-fg);
-  text-decoration: underline;
-  text-decoration-color: var(--color-border-strong);
-  text-underline-offset: 3px;
-  transition: text-decoration-color 0.2s ease;
-}
+  .prose ul,
+  .prose ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
 
-.prose a:hover {
-  text-decoration-color: var(--color-fg);
-}
+  .prose li {
+    margin: 0.4rem 0;
+  }
 
-.prose ul,
-.prose ol {
-  margin: 1rem 0;
-  padding-left: 1.5rem;
-}
+  .prose ul {
+    list-style-type: disc;
+  }
 
-.prose li {
-  margin: 0.4rem 0;
-}
+  .prose ol {
+    list-style-type: decimal;
+  }
 
-.prose ul {
-  list-style-type: disc;
-}
+  .prose code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--color-border);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+  }
 
-.prose ol {
-  list-style-type: decimal;
-}
+  .prose pre {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    background: var(--color-fg);
+    color: var(--color-bg);
+    padding: 1.25rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    line-height: 1.5;
+  }
 
-.prose code {
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-  background: var(--color-border);
-  padding: 0.1em 0.35em;
-  border-radius: 3px;
-}
+  .prose pre code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+  }
 
-.prose pre {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  background: var(--color-fg);
-  color: var(--color-bg);
-  padding: 1.25rem;
-  border-radius: 6px;
-  overflow-x: auto;
-  margin: 1.5rem 0;
-  line-height: 1.5;
-}
+  .prose blockquote {
+    border-left: 2px solid var(--color-border-strong);
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+    color: var(--color-fg-muted);
+    font-style: italic;
+  }
 
-.prose pre code {
-  background: transparent;
-  padding: 0;
-  color: inherit;
-}
-
-.prose blockquote {
-  border-left: 2px solid var(--color-border-strong);
-  padding-left: 1.25rem;
-  margin: 1.5rem 0;
-  color: var(--color-fg-muted);
-  font-style: italic;
-}
-
-.prose hr {
-  border: none;
-  border-top: 1px solid var(--color-border);
-  margin: 3rem 0;
+  .prose hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 3rem 0;
+  }
 }

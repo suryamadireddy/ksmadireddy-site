@@ -1,140 +1,165 @@
-import Image from "next/image";
+import Link from "next/link";
+import type { ReactNode } from "react";
 
 type Status = "BUILDING" | "SHIPPED" | "DESIGNING";
 
-type Link = {
-  label: string;
-  href: string;
-  /** mark as TBD/placeholder so it renders muted */
-  pending?: boolean;
-};
-
-export type WorkCardProps = {
-  index: string; // "01", "02", "03"
-  status: Status;
-  year: string;
+type WorkCardCommon = {
+  status?: Status;
   title: string;
   tagline: string;
-  body: React.ReactNode;
-  image?: {
-    src: string;
-    alt: string;
-    aspectRatio?: string; // e.g. "16/10", default "16/10"
-  };
-  embed?: string;
-  links: Link[];
+  body: ReactNode;
 };
 
-export function WorkCard({
-  index,
-  status,
-  year,
-  title,
-  tagline,
-  body,
-  image,
-  embed,
-  links,
-}: WorkCardProps) {
+/** Embed is usable in-page (no overlay navigation). Omit `mediaHref`. */
+type WorkCardEmbedInteractive = WorkCardCommon & {
+  embed: string;
+  interactiveEmbed: true;
+  image?: never;
+  mediaHref?: never;
+};
+
+/** Embed preview is a single click target to `mediaHref`. */
+type WorkCardEmbedLinked = WorkCardCommon & {
+  embed: string;
+  interactiveEmbed?: false;
+  image?: never;
+  mediaHref: string;
+};
+
+type WorkCardImage = WorkCardCommon & {
+  image: {
+    src: string;
+    alt: string;
+    aspectRatio?: string;
+  };
+  embed?: never;
+  interactiveEmbed?: never;
+  mediaHref: string;
+};
+
+export type WorkCardProps =
+  | WorkCardEmbedInteractive
+  | WorkCardEmbedLinked
+  | WorkCardImage;
+
+const measure = "max-w-4xl";
+
+function isExternalHref(href: string) {
+  return href.startsWith("http");
+}
+
+export function WorkCard(props: WorkCardProps) {
+  const { status, title, tagline, body } = props;
+
+  const ringWrap =
+    "mb-10 md:mb-12 rounded-md focus-within:ring-2 focus-within:ring-[var(--color-fg)] focus-within:ring-offset-4 focus-within:ring-offset-[var(--color-bg)]";
+
+  const mediaScale =
+    "relative w-full overflow-hidden rounded-md border border-[var(--color-border)] transition-transform duration-300 ease-out motion-safe:hover:scale-[1.02] motion-safe:focus-within:scale-[1.02]";
+
+  const mediaFrame =
+    "relative w-full overflow-hidden rounded-md border border-[var(--color-border)]";
+
+  const imageLinkClass =
+    "block w-full mb-10 md:mb-12 rounded-md outline-none transition-transform duration-300 ease-out motion-safe:hover:scale-[1.02] motion-safe:focus-visible:scale-[1.02] focus-visible:ring-2 focus-visible:ring-[var(--color-fg)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--color-bg)]";
+
+  let mediaBlock: ReactNode;
+
+  if ("embed" in props && props.embed) {
+    if (props.interactiveEmbed) {
+      mediaBlock = (
+        <div
+          className="relative mb-10 md:mb-12 w-full overflow-hidden rounded-md border border-[var(--color-border)]"
+          style={{ height: "600px" }}
+        >
+          <iframe
+            src={props.embed}
+            className="h-full w-full border-0"
+            title={`${title} — live`}
+            loading="lazy"
+          />
+        </div>
+      );
+    } else {
+      const { embed, mediaHref } = props;
+      const external = isExternalHref(mediaHref);
+      const overlayLabel = `Open ${title} — live site`;
+      mediaBlock = (
+        <div className={ringWrap}>
+          <div className={mediaScale} style={{ height: "600px" }}>
+            <iframe
+              src={embed}
+              className="pointer-events-none absolute inset-0 h-full w-full border-0"
+              title={`${title} — preview`}
+              loading="lazy"
+            />
+            <a
+              href={mediaHref}
+              target={external ? "_blank" : undefined}
+              rel={external ? "noopener noreferrer" : undefined}
+              className="absolute inset-0 z-10 rounded-[inherit] outline-none"
+              aria-label={overlayLabel}
+            />
+          </div>
+        </div>
+      );
+    }
+  } else if ("image" in props && props.image) {
+    const { image, mediaHref } = props;
+    const external = isExternalHref(mediaHref);
+    const inner = (
+      <div
+        className={`${mediaFrame} bg-[var(--color-bg-elevated)]`}
+        style={{ aspectRatio: image.aspectRatio ?? "16 / 10" }}
+      >
+        <img
+          src={image.src}
+          alt={image.alt}
+          className="absolute inset-0 h-full w-full object-contain object-center"
+          loading="lazy"
+        />
+      </div>
+    );
+
+    mediaBlock = external ? (
+      <a
+        href={mediaHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={imageLinkClass}
+      >
+        {inner}
+      </a>
+    ) : (
+      <Link href={mediaHref} className={imageLinkClass}>
+        {inner}
+      </Link>
+    );
+  } else {
+    mediaBlock = null;
+  }
+
   return (
     <article className="py-12 md:py-20 border-t border-[var(--color-border)] first:border-t-0">
-      <div className="max-w-2xl">
-        <div className="flex items-center gap-4 mb-6">
-          <span className="label">{index}</span>
-          <span className="label">·</span>
-          <span className="label">{status}</span>
-          <span className="label">·</span>
-          <span className="label">{year}</span>
-        </div>
+      <div className={measure}>
+        {status ? (
+          <div className="mb-6">
+            <span className="label">{status}</span>
+          </div>
+        ) : null}
 
         <h3 className="display text-4xl md:text-5xl lg:text-6xl mb-4">{title}</h3>
 
-        <p className="text-xl md:text-2xl text-[var(--color-fg-muted)] max-w-[55ch] mb-10 md:mb-12 leading-snug">
+        <p className="text-xl md:text-2xl text-[var(--color-fg-muted)] max-w-[62ch] mb-10 md:mb-12 leading-snug">
           {tagline}
         </p>
       </div>
 
-      {embed ? (
-        <div
-          className="relative w-full mb-10 md:mb-12 overflow-hidden rounded-md border border-[var(--color-border)]"
-          style={{ height: "600px" }}
-        >
-          <iframe
-            src={embed}
-            className="w-full h-full border-0"
-            title={`${title} — live`}
-            loading="lazy"
-            style={{ overflow: "hidden" }}
-          />
-        </div>
-      ) : image ? (
-        <div
-          className="relative w-full mb-10 md:mb-12 overflow-hidden rounded-md bg-[var(--color-bg-elevated)] border border-[var(--color-border)]"
-          style={{ aspectRatio: image.aspectRatio ?? "16 / 10" }}
-        >
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
-            sizes="(min-width: 768px) 720px, 100vw"
-            className="object-cover"
-          />
-        </div>
-      ) : null}
+      {mediaBlock}
 
-      <div className="max-w-2xl">
-        <div className="max-w-[60ch] space-y-4 text-base md:text-lg leading-relaxed mb-8 md:mb-10">
+      <div className={measure}>
+        <div className="max-w-[62ch] space-y-4 text-base md:text-lg leading-relaxed text-[var(--color-fg-muted)]">
           {body}
-        </div>
-
-        <div className="flex flex-wrap gap-x-6 gap-y-3">
-          {links.map((link) => {
-            const rowClass = `inline-flex items-baseline gap-2 text-sm md:text-base font-medium underline decoration-1 underline-offset-[6px] transition-[text-decoration-color] duration-200 ${
-              link.pending
-                ? "text-[var(--color-fg-subtle)] decoration-[var(--color-border)] cursor-not-allowed"
-                : "decoration-[var(--color-border-strong)] hover:decoration-[var(--color-fg)]"
-            }`;
-            const suffix = (
-              <span
-                aria-hidden
-                className={
-                  link.pending
-                    ? "text-[var(--color-fg-subtle)]"
-                    : "text-[var(--color-fg-muted)]"
-                }
-              >
-                {link.pending ? "tbd" : "→"}
-              </span>
-            );
-            if (link.pending) {
-              return (
-                <span
-                  key={link.label}
-                  className={rowClass}
-                  aria-disabled="true"
-                >
-                  {link.label}
-                  {suffix}
-                </span>
-              );
-            }
-            return (
-              <a
-                key={link.label}
-                href={link.href}
-                target={link.href.startsWith("http") ? "_blank" : undefined}
-                rel={
-                  link.href.startsWith("http")
-                    ? "noopener noreferrer"
-                    : undefined
-                }
-                className={rowClass}
-              >
-                {link.label}
-                {suffix}
-              </a>
-            );
-          })}
         </div>
       </div>
     </article>
