@@ -79,6 +79,26 @@
     color: var(--color-fg-muted);
   }
 
+  /* Hero headline row: fluid `cqw` in plain CSS (Tailwind arbitrary `text-[max(...)]` is easy to miss in the build). */
+  .hero-headline-line {
+    width: max-content;
+    min-height: 1.12lh;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.12;
+    color: var(--color-fg);
+    font-size: max(0.35rem, min(3.85rem, calc(90cqw / 23)));
+  }
+
+  @media (min-width: 768px) {
+    .hero-headline-line {
+      letter-spacing: 0.048em;
+    }
+  }
+
   /* Display headings — Instrument Serif */
   .display {
     font-family: var(--font-serif);

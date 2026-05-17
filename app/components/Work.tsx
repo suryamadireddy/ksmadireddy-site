@@ -2,56 +2,90 @@ import { WorkCard } from "./WorkCard";
 
 export function Work() {
   return (
-    <section className="py-16 md:py-24">
+    <section className="pt-16 md:pt-24 pb-16 md:pb-24">
       <WorkCard
-        status="BUILDING"
         title="KSM Studio"
-        tagline="A four-tier agentic system with strict isolation contracts and a multi-pass distillation pipeline."
+        tagline="A pipeline that turns raw ideas into a builder-ready briefs. Four agents, each with one job: interrogate the idea, research the space, draft the spec, distill it for reading."
         mediaHref="/ksm-studio"
         image={{
           src: "/work/ksm-studio.svg",
           alt: "KSM Studio — four-tier agent pipeline architecture",
         }}
-        body={
-          <p>
-            An agentic system for testing architecture ideas: explicit contracts
-            between triage, research, multi-pass artifacts, and distillation.
-            Open the diagram for the full breakdown.
-          </p>
-        }
       />
 
       <WorkCard
-        status="SHIPPED"
         title="Meridian Seven"
-        tagline="A daily news digest on a 3D globe — five stories per day, scored by real-world impact, synthesized in a wire-service tone."
+        tagline="Five stories a day, plotted on a 3D globe and ranked by real-world impact. Short, factual, no editorializing."
         embed="https://the-meridian-seven.vercel.app"
         interactiveEmbed
-        body={
-          <p>
-            End-to-end shipped build: globe.gl plus a Claude-powered pipeline
-            and Supabase — five daily stories in a neutral wire-service tone.
-            Frozen as a finished artifact.
-          </p>
-        }
       />
 
       <WorkCard
-        status="DESIGNING"
         title="Atlas"
-        tagline="A queryable atlas of how the world works. Natural-language queries route to curated data layers — minerals, historical empires, species ranges — rendered on a globe."
+        tagline={
+          <>
+            A queryable globe. Ask for trade routes, historical empires, or
+            species migrations and they surface as visual layers.
+            <br />
+            <br />
+            Built on Meridian&apos;s globe, without the news feed. Open spec - Still in development.
+          </>
+        }
         mediaHref="/atlas"
         image={{
-          src: "/work/atlas-card.svg",
+          src: "/work/atlas-card.png",
           alt: "Atlas — queryable globe and working spec",
+          objectFit: "cover",
         }}
-        body={
-          <p>
-            The iteration after Meridian: same globe and tone, but evergreen
-            layers instead of a news feed — queryable in natural language. The
-            working spec is public.
-          </p>
+      />
+      <WorkCard
+        title="DreamSpace"
+        tagline={
+          <>
+            A marketplace connecting Indian homeowners with vetted architects and interior designers.
+          </>
         }
+        mediaHref="/dreamspace"
+        image={{
+          src: "/work/dreamspace.png",
+          alt: "DreamSpace — marketplace connecting Indian homeowners with vetted architects and interior designers",
+          objectFit: "cover",
+        }}
+      />
+      <WorkCard
+        title="Placemaking"
+        tagline={
+          <>
+            Designing third places that give people a reason to stay.
+          </>
+        }
+        mediaHref="/placemaking"
+        image={{
+          src: "/work/placemaking.png",
+          alt: "Serentity — designing third places that give people a reason to stay",
+        }}
+      />
+      <WorkCard
+        title="About Me"
+        tagline={
+          <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3">
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-baseline gap-2 text-sm md:text-base font-medium underline decoration-1 decoration-[var(--color-border-strong)] underline-offset-[6px] hover:decoration-[var(--color-fg)] transition-[text-decoration-color] duration-200"
+          >
+            Download resume
+          </a>
+        </div>
+        }
+        mediaHref="/aboutme"
+        image={{
+          src: "/hero-photo-2.png",
+          alt: "Krishna Surya Madireddy",
+          objectFit: "cover",
+          objectPosition: "center 20%",
+        }}
       />
     </section>
   );

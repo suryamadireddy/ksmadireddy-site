@@ -8,7 +8,11 @@ export default function HomePage() {
     <main className="mx-auto w-full min-w-0 max-w-6xl px-3 md:px-5 lg:px-10">
       <Hero />
       <Story />
-      <Work />
+      <div className="relative w-screen max-w-[100vw] ml-[calc(50%-50vw)] mr-[calc(50%-50vw)] box-border px-3 md:px-5 lg:px-10">
+        <div className="mx-auto w-full min-w-0 max-w-[84rem]">
+          <Work />
+        </div>
+      </div>
       <Background />
     </main>
   );

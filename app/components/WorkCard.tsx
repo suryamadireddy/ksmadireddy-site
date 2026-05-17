@@ -1,13 +1,10 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-type Status = "BUILDING" | "SHIPPED" | "DESIGNING";
-
 type WorkCardCommon = {
-  status?: Status;
   title: string;
-  tagline: string;
-  body: ReactNode;
+  tagline: ReactNode;
+  body?: ReactNode;
 };
 
 /** Embed is usable in-page (no overlay navigation). Omit `mediaHref`. */
@@ -31,6 +28,9 @@ type WorkCardImage = WorkCardCommon & {
     src: string;
     alt: string;
     aspectRatio?: string;
+    /** Default `contain`. Use `cover` to fill the frame (e.g. photos). */
+    objectFit?: "contain" | "cover";
+    objectPosition?: string;
   };
   embed?: never;
   interactiveEmbed?: never;
@@ -42,39 +42,33 @@ export type WorkCardProps =
   | WorkCardEmbedLinked
   | WorkCardImage;
 
-const measure = "max-w-4xl";
+const measure = "max-w-[84rem]";
+
+const workTitleClass =
+  "font-mono font-medium uppercase tracking-[0.05em] md:tracking-[0.048em] leading-[1.12] text-2xl md:text-3xl lg:text-4xl";
+
+const mediaShellClass =
+  "relative w-full min-h-[240px] overflow-hidden rounded-md border border-[var(--color-border)] bg-[var(--color-bg-elevated)] sm:min-h-[320px] lg:min-h-[380px]";
+
+const mediaHoverClass =
+  "block w-full rounded-md outline-none transition-transform duration-300 ease-out motion-safe:hover:scale-[1.02] motion-safe:focus-visible:scale-[1.02] focus-visible:ring-2 focus-visible:ring-[var(--color-fg)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--color-bg)]";
 
 function isExternalHref(href: string) {
   return href.startsWith("http");
 }
 
 export function WorkCard(props: WorkCardProps) {
-  const { status, title, tagline, body } = props;
-
-  const ringWrap =
-    "mb-10 md:mb-12 rounded-md focus-within:ring-2 focus-within:ring-[var(--color-fg)] focus-within:ring-offset-4 focus-within:ring-offset-[var(--color-bg)]";
-
-  const mediaScale =
-    "relative w-full overflow-hidden rounded-md border border-[var(--color-border)] transition-transform duration-300 ease-out motion-safe:hover:scale-[1.02] motion-safe:focus-within:scale-[1.02]";
-
-  const mediaFrame =
-    "relative w-full overflow-hidden rounded-md border border-[var(--color-border)]";
-
-  const imageLinkClass =
-    "block w-full mb-10 md:mb-12 rounded-md outline-none transition-transform duration-300 ease-out motion-safe:hover:scale-[1.02] motion-safe:focus-visible:scale-[1.02] focus-visible:ring-2 focus-visible:ring-[var(--color-fg)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--color-bg)]";
+  const { title, tagline, body } = props;
 
   let mediaBlock: ReactNode;
 
   if ("embed" in props && props.embed) {
     if (props.interactiveEmbed) {
       mediaBlock = (
-        <div
-          className="relative mb-10 md:mb-12 w-full overflow-hidden rounded-md border border-[var(--color-border)]"
-          style={{ height: "600px" }}
-        >
+        <div className={`${mediaShellClass} aspect-[16/10]`}>
           <iframe
             src={props.embed}
-            className="h-full w-full border-0"
+            className="absolute inset-0 h-full w-full border-0"
             title={`${title} — live`}
             loading="lazy"
           />
@@ -85,8 +79,10 @@ export function WorkCard(props: WorkCardProps) {
       const external = isExternalHref(mediaHref);
       const overlayLabel = `Open ${title} — live site`;
       mediaBlock = (
-        <div className={ringWrap}>
-          <div className={mediaScale} style={{ height: "600px" }}>
+        <div className="rounded-md focus-within:ring-2 focus-within:ring-[var(--color-fg)] focus-within:ring-offset-4 focus-within:ring-offset-[var(--color-bg)]">
+          <div
+            className={`${mediaShellClass} aspect-[16/10] transition-transform duration-300 ease-out motion-safe:hover:scale-[1.02] motion-safe:focus-within:scale-[1.02]`}
+          >
             <iframe
               src={embed}
               className="pointer-events-none absolute inset-0 h-full w-full border-0"
@@ -109,13 +105,16 @@ export function WorkCard(props: WorkCardProps) {
     const external = isExternalHref(mediaHref);
     const inner = (
       <div
-        className={`${mediaFrame} bg-[var(--color-bg-elevated)]`}
+        className={mediaShellClass}
         style={{ aspectRatio: image.aspectRatio ?? "16 / 10" }}
       >
         <img
           src={image.src}
           alt={image.alt}
-          className="absolute inset-0 h-full w-full object-contain object-center"
+          className={`absolute inset-0 h-full w-full ${
+            image.objectFit === "cover" ? "object-cover" : "object-contain"
+          }`}
+          style={{ objectPosition: image.objectPosition ?? "center" }}
           loading="lazy"
         />
       </div>
@@ -126,12 +125,12 @@ export function WorkCard(props: WorkCardProps) {
         href={mediaHref}
         target="_blank"
         rel="noopener noreferrer"
-        className={imageLinkClass}
+        className={mediaHoverClass}
       >
         {inner}
       </a>
     ) : (
-      <Link href={mediaHref} className={imageLinkClass}>
+      <Link href={mediaHref} className={mediaHoverClass}>
         {inner}
       </Link>
     );
@@ -140,27 +139,23 @@ export function WorkCard(props: WorkCardProps) {
   }
 
   return (
-    <article className="py-12 md:py-20 border-t border-[var(--color-border)] first:border-t-0">
-      <div className={measure}>
-        {status ? (
-          <div className="mb-6">
-            <span className="label">{status}</span>
-          </div>
-        ) : null}
-
-        <h3 className="display text-4xl md:text-5xl lg:text-6xl mb-4">{title}</h3>
-
-        <p className="text-xl md:text-2xl text-[var(--color-fg-muted)] max-w-[62ch] mb-10 md:mb-12 leading-snug">
-          {tagline}
-        </p>
-      </div>
-
-      {mediaBlock}
-
-      <div className={measure}>
-        <div className="max-w-[62ch] space-y-4 text-base md:text-lg leading-relaxed text-[var(--color-fg-muted)]">
-          {body}
+    <article className="py-12 md:py-20 first:pt-0 last:pb-0">
+      <div
+        className={`${measure} grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] xl:gap-12`}
+      >
+        <div className="min-w-0">
+          <h3 className={`${workTitleClass} mb-4`}>{title}</h3>
+          <p className="text-base md:text-lg leading-snug text-[var(--color-fg-muted)]">
+            {tagline}
+          </p>
+          {body ? (
+            <div className="mt-6 space-y-4 text-base md:text-lg leading-relaxed text-[var(--color-fg-muted)]">
+              {body}
+            </div>
+          ) : null}
         </div>
+
+        {mediaBlock ? <div className="min-w-0 w-full">{mediaBlock}</div> : null}
       </div>
     </article>
   );

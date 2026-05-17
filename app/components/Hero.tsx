@@ -3,9 +3,9 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const LINE1 = "Exploring the possibilites of AI";
-const LINE2 = "By making imagination interactive";
-const LINE3 = "Through prototypes you can explore";
+const LINE1 = "I'M A PM WHO DESIGNS AND BUILDS";
+const LINE2 = "I WORK TOWARDS THE BEST VERSION";
+const LINE3 = "OF PRODUCTS AND OF PEOPLE ALIKE";
 
 const FULL_MULTILINE = `${LINE1}\n${LINE2}\n${LINE3}`;
 
@@ -20,14 +20,14 @@ function headlineRows(typed: string): [string, string, string] {
 /** Simple typewriter pacing (~17 chars/sec). */
 const MS_PER_CHARACTER = 58;
 
-/** Same row structure as the scroll version (full-width row + w-max nowrap inner); font nudged so lines fit the 90% column without scrolling. */
-const HEADLINE_INNER_CLASS =
-  "w-max min-h-[1.12lh] whitespace-nowrap font-mono font-medium uppercase tracking-[0.05em] md:tracking-[0.048em] leading-[1.12] text-[clamp(2rem,calc(90cqw/23),3.85rem)]";
-
-function HeadlineRow({ text }: { text: string }) {
+/** Ghost line reserves width so the centered block doesn’t shift while typewriter grows LTR. */
+function HeadlineRow({ text, fullLine }: { text: string; fullLine: string }) {
   return (
-    <div className="min-w-0 w-full">
-      <div className={HEADLINE_INNER_CLASS}>{text}</div>
+    <div className="relative min-w-0 w-full">
+      <div className="hero-headline-line invisible" aria-hidden>
+        {fullLine}
+      </div>
+      <div className="hero-headline-line absolute left-0 top-0">{text}</div>
     </div>
   );
 }
@@ -113,11 +113,11 @@ export function Hero() {
       </div>
 
       <div className="@container mb-8 w-full min-w-0 md:mb-10">
-        <h1 className="w-full min-w-0 text-left" aria-label={ARIA_HEADLINE}>
-          <div className="mx-auto flex w-[90%] max-w-full min-w-0 flex-col gap-1">
-            <HeadlineRow text={headline1} />
-            <HeadlineRow text={headline2} />
-            <HeadlineRow text={headline3} />
+        <h1 className="w-full min-w-0" aria-label={ARIA_HEADLINE}>
+          <div className="mx-auto flex w-max max-w-[90%] min-w-0 flex-col gap-1">
+            <HeadlineRow text={headline1} fullLine={LINE1} />
+            <HeadlineRow text={headline2} fullLine={LINE2} />
+            <HeadlineRow text={headline3} fullLine={LINE3} />
           </div>
         </h1>
       </div>
