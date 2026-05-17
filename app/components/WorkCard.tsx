@@ -1,10 +1,24 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { contentGrid, mediaShellClass } from "./contentLayout";
 
 type WorkCardCommon = {
   title: string;
   tagline: ReactNode;
   body?: ReactNode;
+};
+
+/** Custom left/right slots (e.g. site hero) — no default title or media chrome. */
+type WorkCardSlots = {
+  lead: ReactNode;
+  media: ReactNode;
+  body?: ReactNode;
+  title?: never;
+  tagline?: never;
+  image?: never;
+  embed?: never;
+  interactiveEmbed?: never;
+  mediaHref?: never;
 };
 
 /** Embed is usable in-page (no overlay navigation). Omit `mediaHref`. */
@@ -40,15 +54,11 @@ type WorkCardImage = WorkCardCommon & {
 export type WorkCardProps =
   | WorkCardEmbedInteractive
   | WorkCardEmbedLinked
-  | WorkCardImage;
-
-const measure = "max-w-[84rem]";
+  | WorkCardImage
+  | WorkCardSlots;
 
 const workTitleClass =
   "font-mono font-medium uppercase tracking-[0.05em] md:tracking-[0.048em] leading-[1.12] text-2xl md:text-3xl lg:text-4xl";
-
-const mediaShellClass =
-  "relative w-full min-h-[240px] overflow-hidden rounded-md border border-[var(--color-border)] bg-[var(--color-bg-elevated)] sm:min-h-[320px] lg:min-h-[380px]";
 
 const mediaHoverClass =
   "block w-full rounded-md outline-none transition-transform duration-300 ease-out motion-safe:hover:scale-[1.02] motion-safe:focus-visible:scale-[1.02] focus-visible:ring-2 focus-visible:ring-[var(--color-fg)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--color-bg)]";
@@ -57,7 +67,28 @@ function isExternalHref(href: string) {
   return href.startsWith("http");
 }
 
+function isSlotCard(props: WorkCardProps): props is WorkCardSlots {
+  return "lead" in props && "media" in props;
+}
+
 export function WorkCard(props: WorkCardProps) {
+  if (isSlotCard(props)) {
+    const { lead, media, body } = props;
+    return (
+      <article className="py-12 md:py-20 first:pt-0 last:pb-0">
+        <div className={contentGrid}>
+          <div className="min-w-0">{lead}</div>
+          <div className="min-w-0 w-full">{media}</div>
+        </div>
+        {body ? (
+          <div className="mt-6 space-y-4 text-base md:text-lg leading-relaxed text-[var(--color-fg-muted)]">
+            {body}
+          </div>
+        ) : null}
+      </article>
+    );
+  }
+
   const { title, tagline, body } = props;
 
   let mediaBlock: ReactNode;
@@ -140,14 +171,12 @@ export function WorkCard(props: WorkCardProps) {
 
   return (
     <article className="py-12 md:py-20 first:pt-0 last:pb-0">
-      <div
-        className={`${measure} grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] xl:gap-12`}
-      >
+      <div className={contentGrid}>
         <div className="min-w-0">
           <h3 className={`${workTitleClass} mb-4`}>{title}</h3>
-          <p className="text-base md:text-lg leading-snug text-[var(--color-fg-muted)]">
+          <div className="text-base md:text-lg leading-snug text-[var(--color-fg-muted)]">
             {tagline}
-          </p>
+          </div>
           {body ? (
             <div className="mt-6 space-y-4 text-base md:text-lg leading-relaxed text-[var(--color-fg-muted)]">
               {body}

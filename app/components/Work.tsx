@@ -1,8 +1,11 @@
+import { HeroCard } from "./HeroCard";
 import { WorkCard } from "./WorkCard";
 
 export function Work() {
   return (
-    <section className="pt-16 md:pt-24 pb-16 md:pb-24">
+    <section className="pt-20 md:pt-32 pb-16 md:pb-24">
+      <HeroCard />
+
       <WorkCard
         title="KSM Studio"
         tagline="A pipeline that turns raw ideas into a builder-ready briefs. Four agents, each with one job: interrogate the idea, research the space, draft the spec, distill it for reading."
@@ -28,7 +31,8 @@ export function Work() {
             species migrations and they surface as visual layers.
             <br />
             <br />
-            Built on Meridian&apos;s globe, without the news feed. Open spec - Still in development.
+            Built on Meridian&apos;s globe, without the news feed. Open spec -
+            Still in development.
           </>
         }
         mediaHref="/atlas"
@@ -42,7 +46,8 @@ export function Work() {
         title="DreamSpace"
         tagline={
           <>
-            A marketplace connecting Indian homeowners with vetted architects and interior designers.
+            A marketplace connecting Indian homeowners with vetted architects
+            and interior designers.
           </>
         }
         mediaHref="/dreamspace"
@@ -55,9 +60,7 @@ export function Work() {
       <WorkCard
         title="Placemaking"
         tagline={
-          <>
-            Designing third places that give people a reason to stay.
-          </>
+          <>Designing third places that give people a reason to stay.</>
         }
         mediaHref="/placemaking"
         image={{
@@ -69,15 +72,15 @@ export function Work() {
         title="About Me"
         tagline={
           <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3">
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-baseline gap-2 text-sm md:text-base font-medium underline decoration-1 decoration-[var(--color-border-strong)] underline-offset-[6px] hover:decoration-[var(--color-fg)] transition-[text-decoration-color] duration-200"
-          >
-            Download resume
-          </a>
-        </div>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-baseline gap-2 text-sm md:text-base font-medium underline decoration-1 decoration-[var(--color-border-strong)] underline-offset-[6px] hover:decoration-[var(--color-fg)] transition-[text-decoration-color] duration-200"
+            >
+              Download resume
+            </a>
+          </div>
         }
         mediaHref="/aboutme"
         image={{

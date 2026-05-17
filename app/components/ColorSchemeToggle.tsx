@@ -20,7 +20,7 @@ function applyToDocument(scheme: SiteColorScheme) {
   }
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) {
-    meta.setAttribute("content", scheme === "dark" ? "#000000" : "#faf9f6");
+    meta.setAttribute("content", scheme === "dark" ? "#000000" : "#f5f2eb");
   }
 }
 

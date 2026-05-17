@@ -22,16 +22,16 @@
     color-scheme: dark;
   }
 
-  /* Manual preview: light palette. ColorSchemeToggle sets `data-color-scheme` on <html>. */
+  /* Light palette — warm cream canvas, white elevated surfaces (ColorSchemeToggle). */
   html[data-color-scheme="light"] {
     color-scheme: light;
-    --color-bg: #faf9f6;
-    --color-bg-elevated: #f4f3ef;
+    --color-bg: #f5f2eb;
+    --color-bg-elevated: #ffffff;
     --color-fg: #16161a;
-    --color-fg-muted: #52525b;
-    --color-fg-subtle: #71717a;
-    --color-border: #e4e4e7;
-    --color-border-strong: #c4c4cc;
+    --color-fg-muted: #6b6b73;
+    --color-fg-subtle: #a3a3a8;
+    --color-border: #e8e6e0;
+    --color-border-strong: #d4d2cb;
   }
 
   html {
@@ -79,23 +79,53 @@
     color: var(--color-fg-muted);
   }
 
-  /* Hero headline row: fluid `cqw` in plain CSS (Tailwind arbitrary `text-[max(...)]` is easy to miss in the build). */
-  .hero-headline-line {
-    width: max-content;
-    min-height: 1.12lh;
-    white-space: nowrap;
+  /* Hero KSM — tight line box so cap height aligns with headline column. */
+  .hero-ksm-mark {
+    display: block;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.08em;
+    color: var(--color-fg);
+  }
+
+  /* Hero headline — mobile: fluid clamp; md+: JS sets --hero-headline-font-size for 4 lines. */
+  .hero-headline-container {
+    position: relative;
+  }
+
+  .hero-headline {
+    margin: 0;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: break-word;
     font-family: var(--font-mono);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    line-height: 1.12;
+    line-height: 1.15;
     color: var(--color-fg);
-    font-size: max(0.35rem, min(3.85rem, calc(90cqw / 23)));
+    font-size: clamp(1rem, 0.35rem + 1.1cqw, 1.75rem);
+  }
+
+  .hero-headline--measure {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    visibility: hidden;
+    pointer-events: none;
+    user-select: none;
   }
 
   @media (min-width: 768px) {
-    .hero-headline-line {
-      letter-spacing: 0.048em;
+    .hero-headline {
+      letter-spacing: 0.028em;
+    }
+
+    .hero-headline-container .hero-headline {
+      font-size: var(--hero-headline-font-size, 1.25rem);
     }
   }
 
