@@ -3,7 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { HeroIdentityDetails } from "./HeroIdentityDetails";
 
-const HEADLINE_TEXT = `I care about the feeling an experience leaves behind, not just the task it helps someone complete. A tool can sharpen thought. A space can invite people to stay. A well-designed system can make complexity feel clear. Different mediums, same standard: everything should feel considered for the person on the other side.`;
+const HEADLINE_TEXT = `I believe products are remembered not just for what they help people accomplish, but for how people feel while using them. Done right, a tool can make work feel lighter, a space can make a person want to stay, and a system can make complexity feel clear. Different mediums, same standard: every experience should feel crafted for the person on the other side.`;
 
 const MS_PER_CHARACTER = 58;
 const TARGET_LINES = 4;
@@ -147,7 +147,7 @@ export function HeroCard() {
 
   return (
     <article className="py-12 md:py-20 first:pt-0 last:pb-0">
-      <div className="flex w-full min-w-0 flex-col items-start gap-8 md:gap-10">
+      <div className="flex w-full min-w-0 flex-col items-start gap-16 md:gap-20">
         <div className="min-w-0 self-start">
           <div className="hero-ksm-mark mb-1 md:mb-2">KSM</div>
           <HeroIdentityDetails />
