@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {
+  applyThemeToDocument,
+  type SiteColorScheme,
+} from "../theme-colors";
 
 const STORAGE_KEY = "ksm-site-color-scheme";
-
-type SiteColorScheme = "dark" | "light";
 
 function readStored(): SiteColorScheme | null {
   if (typeof window === "undefined") return null;
@@ -12,42 +14,24 @@ function readStored(): SiteColorScheme | null {
   return v === "light" || v === "dark" ? v : null;
 }
 
-function applyToDocument(scheme: SiteColorScheme) {
-  if (scheme === "light") {
-    document.documentElement.dataset.colorScheme = "light";
-  } else {
-    delete document.documentElement.dataset.colorScheme;
-  }
-  const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) {
-    meta.setAttribute("content", scheme === "dark" ? "#000000" : "#f5f2eb");
-  }
-}
-
-/** Dev / preview control: switch between current dark UI and the earlier light palette. */
 export function ColorSchemeToggle() {
   const [scheme, setScheme] = useState<SiteColorScheme>("dark");
 
-  // Restore from localStorage once — must NOT write to localStorage before this runs
-  // (a second effect that persisted initial "dark" was clobbering a saved "light" choice).
   useEffect(() => {
-    const stored = readStored();
-    const initial = stored ?? "dark";
+    const initial = readStored() ?? "dark";
     setScheme(initial);
-    applyToDocument(initial);
+    applyThemeToDocument(initial);
   }, []);
 
   const toggle = () => {
-    setScheme((prev) => {
-      const next = prev === "dark" ? "light" : "dark";
-      applyToDocument(next);
-      try {
-        window.localStorage.setItem(STORAGE_KEY, next);
-      } catch {
-        /* private mode etc. */
-      }
-      return next;
-    });
+    const next: SiteColorScheme = scheme === "dark" ? "light" : "dark";
+    applyThemeToDocument(next);
+    setScheme(next);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      /* private mode etc. */
+    }
   };
 
   return (
@@ -59,7 +43,7 @@ export function ColorSchemeToggle() {
         aria-pressed={scheme === "light"}
         aria-label={
           scheme === "dark"
-            ? "Switch to original light background and text colors"
+            ? "Switch to light background and text colors"
             : "Switch back to dark theme"
         }
       >

@@ -4,6 +4,8 @@ import { contentGrid, mediaShellClass } from "./contentLayout";
 
 type WorkCardCommon = {
   title: string;
+  /** Project page — title always links here; image/embed use it when applicable. */
+  mediaHref: string;
   tagline: ReactNode;
   body?: ReactNode;
 };
@@ -21,12 +23,11 @@ type WorkCardSlots = {
   mediaHref?: never;
 };
 
-/** Embed is usable in-page (no overlay navigation). Omit `mediaHref`. */
+/** Embed is usable in-page; title uses `mediaHref`, iframe stays interactive. */
 type WorkCardEmbedInteractive = WorkCardCommon & {
   embed: string;
   interactiveEmbed: true;
   image?: never;
-  mediaHref?: never;
 };
 
 /** Embed preview is a single click target to `mediaHref`. */
@@ -57,9 +58,6 @@ export type WorkCardProps =
   | WorkCardImage
   | WorkCardSlots;
 
-const workTitleClass =
-  "font-mono font-medium uppercase tracking-[0.05em] md:tracking-[0.048em] leading-[1.12] text-2xl md:text-3xl lg:text-4xl";
-
 const mediaHoverClass =
   "block w-full rounded-md outline-none transition-transform duration-300 ease-out motion-safe:hover:scale-[1.02] motion-safe:focus-visible:scale-[1.02] focus-visible:ring-2 focus-visible:ring-[var(--color-fg)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--color-bg)]";
 
@@ -69,6 +67,39 @@ function isExternalHref(href: string) {
 
 function isSlotCard(props: WorkCardProps): props is WorkCardSlots {
   return "lead" in props && "media" in props;
+}
+
+const workTitleLinkClass = "work-card-title-link";
+
+function WorkCardTitle({
+  title,
+  href,
+}: {
+  title: string;
+  href: string;
+}) {
+  if (isExternalHref(href)) {
+    return (
+      <h3 className="m-0 mb-4">
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={workTitleLinkClass}
+        >
+          {title}
+        </a>
+      </h3>
+    );
+  }
+
+  return (
+    <h3 className="m-0 mb-4">
+      <Link href={href} className={workTitleLinkClass} prefetch>
+        {title}
+      </Link>
+    </h3>
+  );
 }
 
 export function WorkCard(props: WorkCardProps) {
@@ -89,7 +120,7 @@ export function WorkCard(props: WorkCardProps) {
     );
   }
 
-  const { title, tagline, body } = props;
+  const { title, mediaHref, tagline, body } = props;
 
   let mediaBlock: ReactNode;
 
@@ -172,8 +203,8 @@ export function WorkCard(props: WorkCardProps) {
   return (
     <article className="py-12 md:py-20 first:pt-0 last:pb-0">
       <div className={contentGrid}>
-        <div className="min-w-0">
-          <h3 className={`${workTitleClass} mb-4`}>{title}</h3>
+        <div className="relative z-10 min-w-0">
+          <WorkCardTitle title={title} href={mediaHref} />
           <div className="text-base md:text-lg leading-snug text-[var(--color-fg-muted)]">
             {tagline}
           </div>

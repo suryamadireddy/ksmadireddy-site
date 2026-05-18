@@ -5,33 +5,20 @@
   --font-serif: var(--font-instrument-serif), Georgia, serif;
   --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
-
-  /* Color — pure black canvas, light type */
-  --color-bg: #000000;
-  --color-bg-elevated: #0a0a0a;
-  --color-fg: #f5f5f5;
-  --color-fg-muted: #a3a3a3;
-  --color-fg-subtle: #737373;
-  --color-border: #262626;
-  --color-border-strong: #404040;
 }
 
-/* Keep custom tokens + resets inside Tailwind layers so cascade stays consistent with utilities. */
+/* Default palette (dark). ColorSchemeToggle sets these on <html> inline when switching. */
 @layer base {
   :root {
     color-scheme: dark;
-  }
-
-  /* Light palette — warm cream canvas, white elevated surfaces (ColorSchemeToggle). */
-  html[data-color-scheme="light"] {
-    color-scheme: light;
-    --color-bg: #f5f2eb;
-    --color-bg-elevated: #ffffff;
-    --color-fg: #16161a;
-    --color-fg-muted: #6b6b73;
-    --color-fg-subtle: #a3a3a8;
-    --color-border: #e8e6e0;
-    --color-border-strong: #d4d2cb;
+    --color-bg: #000000;
+    --color-bg-elevated: #0a0a0a;
+    --color-fg: #f5f5f5;
+    --color-fg-muted: #a3a3a3;
+    --color-fg-subtle: #737373;
+    --color-border: #262626;
+    --color-border-strong: #404040;
+    --color-work-title-hover: #d2042d;
   }
 
   html {
@@ -126,6 +113,48 @@
 
     .hero-headline-container .hero-headline {
       font-size: var(--hero-headline-font-size, 1.25rem);
+    }
+  }
+
+  /* Work card title links */
+  .work-card-title-link {
+    position: relative;
+    z-index: 10;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 0 1rem;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.12;
+    font-size: 1.5rem;
+    color: var(--color-fg);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .work-card-title-link:hover {
+    color: var(--color-work-title-hover);
+  }
+
+  .work-card-title-link:focus-visible {
+    outline: 2px solid var(--color-fg);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  @media (min-width: 768px) {
+    .work-card-title-link {
+      letter-spacing: 0.048em;
+      font-size: 1.875rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .work-card-title-link {
+      font-size: 2.25rem;
     }
   }
 

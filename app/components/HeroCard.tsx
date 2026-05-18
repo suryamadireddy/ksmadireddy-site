@@ -3,12 +3,13 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { HeroIdentityDetails } from "./HeroIdentityDetails";
 
-const HEADLINE_TEXT = `I believe products are remembered not just for what they help people accomplish, but for how people feel while using them. Done right, a tool can make work feel lighter, a space can make a person want to stay, and a system can make complexity feel clear. Different mediums, same standard: every experience should feel crafted for the person on the other side.`;
+const HEADLINE_TEXT = `I believe products are remembered not just for what they make possible, but for the experiences they leave behind. When done right, a tool can make work feel effortless, a space can make people feel at ease, and a system can make complexity feel clear. Different mediums, same standard: each moment should feel intentionally designed for the person on the other side. That's the craft.`;
 
 const MS_PER_CHARACTER = 58;
 const TARGET_LINES = 4;
 const MIN_FONT_PX = 12;
-const MAX_FONT_PX = 40;
+const MAX_FONT_PX = 44;
+const DESKTOP_FONT_SCALE = 1.02;
 const MD_QUERY = "(min-width: 768px)";
 
 function countLines(el: HTMLElement): number {
@@ -17,7 +18,7 @@ function countLines(el: HTMLElement): number {
   return Math.max(1, Math.round(el.scrollHeight / lineHeight));
 }
 
-/** Largest font size (px) where full headline wraps to exactly `targetLines` at `width`. */
+/** Largest font size (px) where full headline wraps to exactly `targetLines`. */
 function fitFontSizeForLines(
   measure: HTMLElement,
   width: number,
@@ -80,7 +81,8 @@ export function HeroCard() {
       const width = Math.round(container.clientWidth);
       if (width < 1) return;
 
-      const px = fitFontSizeForLines(measure, width, TARGET_LINES);
+      const basePx = fitFontSizeForLines(measure, width, TARGET_LINES);
+      const px = Math.min(Math.round(basePx * DESKTOP_FONT_SCALE), MAX_FONT_PX);
       container.style.setProperty("--hero-headline-font-size", `${px}px`);
     };
 
