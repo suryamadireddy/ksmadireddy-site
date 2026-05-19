@@ -27,7 +27,7 @@ const PROBLEMS = [
       "Infinite scroll and push alerts train urgency, not understanding. Most stories never earn attention proportional to their impact — the feed wins by being endless, not by being useful.",
     ],
     image: {
-      src: "/work/meridian/overload.svg",
+      src: "/work/meridian/overload.png",
       alt: "News feed overload — endless stream of headlines",
       placeholderLabel: "public/work/meridian/problem-1.png",
     },
@@ -38,7 +38,7 @@ const PROBLEMS = [
       "Ranking by clicks and outrage optimizes for reaction, not consequence. The important story and the loud story diverge — and readers learn to chase noise.",
     ],
     image: {
-      src: "/work/meridian/clickbait1.svg",
+      src: "/work/meridian/clickbait.png",
       alt: "Engagement metrics driving news ranking",
       placeholderLabel: "public/work/meridian/problem-2.png",
     },
@@ -49,7 +49,7 @@ const PROBLEMS = [
       "Headlines strip geography and systems. Readers finish an article without a mental map of where events sit — context is optional, not structural.",
     ],
     image: {
-      src: "/work/meridian/locationstruggle.svg",
+      src: "/work/meridian/locationstruggle.png",
       alt: "Headlines without geographic context",
       placeholderLabel: "public/work/meridian/problem-3.png",
     },
@@ -63,7 +63,7 @@ const SOLUTIONS = [
       "A fixed daily set — five stories, scored for real-world significance. Copy is short, wire-service in tone, with no editorializing. The reader knows the scope before they start.",
     ],
     image: {
-      src: "/work/meridian/impactfulfive.svg",
+      src: "/work/meridian/impactfulfive.png",
       alt: "Meridian — five daily stories ranked by impact",
       placeholderLabel: "public/work/meridian/solution-1.png",
     },
