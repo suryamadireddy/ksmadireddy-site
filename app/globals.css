@@ -66,6 +66,73 @@
     color: var(--color-fg-muted);
   }
 
+  /* Larger label for case study section headers (Introduction, Problems, Solutions). */
+  .case-study-section-label {
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    color: var(--color-fg);
+  }
+
+  @media (min-width: 768px) {
+    .case-study-section-label {
+      font-size: 17px;
+    }
+  }
+
+  /* Case-study section with a sticky left-rail label.
+   * Below lg: stacked — label sits inline above content.
+   * lg+: 2-column grid with a sticky label column. The wider main
+   * (max-w-7xl on these pages) keeps the rail flush with the page edge. */
+  .case-study-section-rail {
+    margin-top: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .case-study-section-rail {
+      margin-top: 6rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .case-study-section-rail {
+      margin-top: 7rem;
+      display: grid;
+      grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+
+    .case-study-section-rail > .case-study-deck-header {
+      position: sticky;
+      top: 2rem;
+      align-self: start;
+      margin-bottom: 0;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .case-study-section-rail {
+      grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  /* Plain (no rail) section spacing — used when only a title is provided. */
+  .case-study-section-plain {
+    margin-top: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .case-study-section-plain {
+      margin-top: 6rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .case-study-section-plain {
+      margin-top: 7rem;
+    }
+  }
+
   /* Hero KSM — tight line box so cap height aligns with headline column. */
   .hero-ksm-mark {
     display: block;
@@ -74,6 +141,33 @@
     line-height: 1;
     letter-spacing: -0.08em;
     color: var(--color-fg);
+  }
+
+  /* Project page display title — matches the work-card title font (Geist Mono,
+   * uppercase, weight 500) but without link-specific hover/decoration. */
+  .project-display-mark {
+    display: block;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.12;
+    font-size: 1.5rem;
+    color: var(--color-fg);
+  }
+
+  @media (min-width: 768px) {
+    .project-display-mark {
+      letter-spacing: 0.048em;
+      font-size: 1.875rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .project-display-mark {
+      font-size: 2.25rem;
+    }
   }
 
   /* Hero headline — mobile: fluid clamp; md+: JS sets --hero-headline-font-size for 4 lines. */
@@ -287,4 +381,223 @@
     border-top: 1px solid var(--color-border);
     margin: 3rem 0;
   }
+
+  /* Horizontal-on-desktop / vertical-on-mobile accordion used by /atlas's
+   * Project Specifications section. Mobile default: column of rows whose
+   * max-height transitions from collapsed (label only) to expanded (full body).
+   * lg+: row of flex-grow tiles whose grow factor transitions on hover/focus,
+   * with the collapsed label rotated as a vertical spine. */
+  .spec-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    overflow-anchor: none;
+  }
+
+  .spec-accordion-tile {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-bg-elevated);
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    min-height: 60px;
+    transition: background-color 200ms ease, border-color 200ms ease;
+  }
+
+  .spec-accordion--resizing .spec-accordion-tile,
+  .spec-accordion--resizing .spec-accordion-content {
+    overflow: hidden !important;
+  }
+
+  .spec-accordion-tile[data-state="closed"] .spec-accordion-content {
+    display: none;
+  }
+
+  .spec-accordion-tile:focus-visible {
+    outline: 2px solid var(--color-fg);
+    outline-offset: 3px;
+  }
+
+  .spec-accordion-label {
+    display: flex;
+    align-items: center;
+    padding: 1.125rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+    transition: color 200ms ease, opacity 250ms ease;
+  }
+
+  .spec-accordion-tile[data-state="open"] .spec-accordion-label {
+    color: var(--color-fg);
+  }
+
+  .spec-accordion-content {
+    padding: 0 1.25rem 1.5rem;
+    overflow: hidden;
+  }
+
+  .spec-accordion-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--color-fg);
+    margin: 0 0 1rem;
+  }
+
+  .spec-accordion-body {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-fg-muted);
+  }
+
+  .spec-accordion-body p {
+    margin: 0.5rem 0;
+  }
+
+  .spec-accordion-body p + p {
+    margin-top: 0.75rem;
+  }
+
+  .spec-accordion-body ul,
+  .spec-accordion-body ol {
+    margin: 0.5rem 0;
+    padding-left: 1.25rem;
+  }
+
+  .spec-accordion-body ul {
+    list-style: disc;
+  }
+
+  .spec-accordion-body ol {
+    list-style: decimal;
+  }
+
+  .spec-accordion-body li {
+    margin: 0.25rem 0;
+  }
+
+  .spec-accordion-body strong {
+    font-weight: 600;
+    color: var(--color-fg);
+  }
+
+  .spec-accordion-body h4 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-fg);
+    margin: 1rem 0 0.5rem;
+  }
+
+  .spec-accordion-body h4:first-child {
+    margin-top: 0;
+  }
+
+  .spec-accordion-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 2rem;
+    align-items: start;
+  }
+
+  .spec-accordion-column h4 {
+    margin-top: 0;
+  }
+
+  @media (max-width: 639px) {
+    .spec-accordion-columns {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .spec-accordion-title {
+      font-size: 1.75rem;
+    }
+
+    .spec-accordion-body {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .spec-accordion-tile[data-state="closed"] {
+      max-height: 60px;
+    }
+
+    .spec-accordion-tile[data-state="open"] {
+      max-height: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .spec-accordion {
+      flex-direction: row;
+      height: 540px;
+      gap: 0.5rem;
+    }
+
+    .spec-accordion-tile {
+      flex: 1 1 0;
+      flex-grow: 1;
+      min-width: 56px;
+      min-height: 0;
+      max-height: none;
+      transition: flex-grow 450ms cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 200ms ease, border-color 200ms ease;
+    }
+
+    .spec-accordion-tile[data-state="open"] {
+      flex-grow: 10;
+    }
+
+    .spec-accordion-label {
+      position: absolute;
+      inset: 0;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      padding: 1.5rem 0;
+      font-size: 13px;
+      justify-content: flex-start;
+      align-items: center;
+      pointer-events: none;
+      transition: opacity 250ms ease;
+    }
+
+    .spec-accordion-tile[data-state="open"] .spec-accordion-label {
+      opacity: 0;
+    }
+
+    .spec-accordion-content {
+      position: absolute;
+      inset: 0;
+      padding: 2rem;
+      max-height: none;
+      overflow: hidden;
+    }
+
+    .spec-accordion:not(.spec-accordion--resizing)
+      .spec-accordion-tile[data-state="open"]
+      .spec-accordion-content {
+      display: block;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
+    }
+  }
+
 }

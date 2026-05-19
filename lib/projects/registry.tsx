@@ -32,8 +32,11 @@ export const projects: ProjectDefinition[] = [
       mediaHref: "/meridian",
       tagline:
         "Five stories a day, ranked by real-world impact. Short, factual, no editorializing.",
-      embed: "https://the-meridian-seven.vercel.app",
-      interactiveEmbed: true,
+      image: {
+        src: "/work/meridian.png",
+        alt: "Meridian — five stories a day on a globe",
+        objectFit: "cover",
+      },
     },
   },
   {
@@ -88,11 +91,11 @@ export const projects: ProjectDefinition[] = [
     slug: "placemaking",
     metadata: projectMetadata({
       title: "Placemaking",
-      description: "Designing third places that give people a reason to stay.",
+      description: "Designing places that give people a reason to stay.",
     }),
     card: {
       title: "Placemaking",
-      tagline: <>Designing third places that give people a reason to stay.</>,
+      tagline: <>Designing places that give people a reason to stay.</>,
       mediaHref: "/placemaking",
       image: {
         src: "/work/placemaking.png",
