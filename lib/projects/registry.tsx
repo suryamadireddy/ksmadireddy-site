@@ -1,14 +1,8 @@
 import type { ProjectDefinition } from "./types";
-import { projectMetadata } from "./metadata";
 
 export const projects: ProjectDefinition[] = [
   {
     slug: "ksm-studio",
-    metadata: projectMetadata({
-      title: "KSM Studio",
-      description:
-        "Four-tier agentic system with strict isolation contracts and a multi-pass distillation pipeline. Four agents, each with one job: interrogate the idea, research the space, draft the spec, distill it for reading.",
-    }),
     card: {
       title: "KSM Studio",
       tagline:
@@ -22,11 +16,6 @@ export const projects: ProjectDefinition[] = [
   },
   {
     slug: "meridian",
-    metadata: projectMetadata({
-      title: "Meridian",
-      description:
-        "Five stories a day, ranked by real-world impact. Short, factual, no editorializing.",
-    }),
     card: {
       title: "Meridian",
       mediaHref: "/meridian",
@@ -41,17 +30,11 @@ export const projects: ProjectDefinition[] = [
   },
   {
     slug: "atlas",
-    metadata: projectMetadata({
-      title: "Atlas — Spec",
-      description:
-        "The working spec for Atlas, a queryable atlas of how the world works. Forked from Meridian Seven.",
-      titleFormat: "pipe",
-    }),
     card: {
       title: "Atlas",
       tagline: (
         <>
-          Evolved from Meridian. A queryable globe.
+          A queryable globe. Evolved from Meridian.
           <br />
           Open spec - Still in development.
         </>
@@ -66,11 +49,6 @@ export const projects: ProjectDefinition[] = [
   },
   {
     slug: "dreamspace",
-    metadata: projectMetadata({
-      title: "DreamSpace",
-      description:
-        "A marketplace connecting Indian homeowners with vetted architects and interior designers.",
-    }),
     card: {
       title: "DreamSpace",
       tagline: (
@@ -89,10 +67,6 @@ export const projects: ProjectDefinition[] = [
   },
   {
     slug: "placemaking",
-    metadata: projectMetadata({
-      title: "Placemaking",
-      description: "Designing places that give people a reason to stay.",
-    }),
     card: {
       title: "Placemaking",
       tagline: <>Designing places that give people a reason to stay.</>,
@@ -105,12 +79,6 @@ export const projects: ProjectDefinition[] = [
   },
   {
     slug: "aboutme",
-    metadata: projectMetadata({
-      title: "About",
-      description:
-        "Background — GM platform PM, building across the U.S., India, and Southeast Asia.",
-      titleFormat: "emdash",
-    }),
     card: {
       title: "About Me",
       tagline: (
@@ -135,7 +103,3 @@ export const projects: ProjectDefinition[] = [
     },
   },
 ];
-
-export function getProject(slug: string): ProjectDefinition | undefined {
-  return projects.find((p) => p.slug === slug);
-}

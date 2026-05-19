@@ -3,23 +3,12 @@ import { mediaShellBase } from "../contentLayout";
 type ProjectEmbedProps = {
   src: string;
   title: string;
-  size?: "default" | "hero";
 };
 
-const sizeClass: Record<NonNullable<ProjectEmbedProps["size"]>, string> = {
-  default:
-    "min-h-[240px] sm:min-h-[320px] lg:min-h-[380px] aspect-[16/10]",
-  hero: "min-h-[400px] sm:min-h-[480px] lg:min-h-[560px] aspect-[16/11]",
-};
-
-export function ProjectEmbed({
-  src,
-  title,
-  size = "default",
-}: ProjectEmbedProps) {
+export function ProjectEmbed({ src, title }: ProjectEmbedProps) {
   return (
     <div
-      className={`${mediaShellBase} relative w-full overflow-hidden ${sizeClass[size]}`}
+      className={`${mediaShellBase} relative w-full overflow-hidden min-h-[240px] sm:min-h-[320px] lg:min-h-[380px] aspect-[16/10]`}
     >
       <iframe
         src={src}

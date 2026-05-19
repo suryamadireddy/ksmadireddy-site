@@ -1,6 +1,6 @@
 # ksmadireddy.com (personal site)
 
-Single-page portfolio + `/atlas` spec page. Built per the project spec.
+Single-page portfolio with deep case-study pages for each project.
 
 ## Stack
 
@@ -10,7 +10,6 @@ Single-page portfolio + `/atlas` spec page. Built per the project spec.
 - Tailwind CSS v4
 - Geist Sans + Geist Mono (via `geist` package)
 - Instrument Serif (via `next/font/google`)
-- `marked` for rendering the Atlas spec markdown
 
 ## Local dev
 
@@ -23,44 +22,76 @@ Open http://localhost:3000.
 
 ## Deploy
 
-Push to a GitHub repo, import into Vercel, deploy. Vercel detects Next.js and ships a preview URL within ~60s. Custom domain configured in Vercel project settings.
+Push to GitHub, import into Vercel, deploy. Vercel detects Next.js and ships a preview URL within ~60s. Custom domain configured in Vercel project settings.
+
+## Architecture
+
+### Homepage (`app/page.tsx`)
+
+Renders `<Background />` then `<Work />`. `Work.tsx` is just:
+
+```tsx
+<HeroIntro />
+{projects.map((project) => <WorkCard key={project.slug} {...project.card} />)}
+```
+
+Everything visible on the homepage is driven by **`lib/projects/registry.tsx`** — the single source of truth for the homepage cards. Adding, removing, or reordering a project on the homepage is one edit to that array.
+
+### Project pages (`app/<slug>/page.tsx`)
+
+Each project gets a route under `app/`. The current set:
+
+- `app/aboutme/page.tsx`
+- `app/atlas/page.tsx`
+- `app/dreamspace/page.tsx`
+- `app/ksm-studio/page.tsx`
+- `app/meridian/page.tsx`
+- `app/placemaking/page.tsx`
+
+Pages share a small set of case-study primitives from `app/components/project/`:
+
+- **`ProjectShell`** — page chrome (KSM mark, title, back-link, max-width container).
+- **`CaseStudySection`** — labeled section with a sticky left rail on `lg+`. Every section has a label.
+- **`CaseStudyProse`** — paragraph list with consistent type + spacing.
+- **`CaseStudyImage`** — `16/10` image with a graceful placeholder fallback if the asset is missing.
+- **`CaseStudyScrollDeck`** — vertical list of `CaseStudyCardItem` (title + paragraphs + image). Used by Meridian's experience deck.
+- **`CaseStudySpecAccordion`** — horizontal-on-desktop / vertical-on-mobile accordion. Used by Atlas's "Project Specifications" section.
+- **`ProjectEmbed`** — sized iframe for live previews. Used by Meridian.
+
+Each page co-locates its own `metadata` export.
+
+### Components (`app/components/`)
+
+- **`HeroIntro.tsx`** — homepage hero (typewriter + adaptive font sizing). Holds the 4-line constraint logic.
+- **`HeroLinks.tsx`** — contact links beneath the hero.
+- **`Work.tsx`** — homepage list wrapper.
+- **`WorkCard.tsx`** — single homepage card (image + title + tagline).
+- **`Background.tsx`** — color-scheme + global background.
+- **`ColorSchemeToggle.tsx`** — light/dark toggle.
+- **`contentLayout.ts`** — shared CSS class strings for content width, grid, media shells. Read this before touching layout-related className strings.
+
+## Adding a new project
+
+1. Create `app/<slug>/page.tsx`. Copy an existing one (Atlas or Meridian are the most-featured templates) and adapt.
+2. Add an entry to the `projects` array in `lib/projects/registry.tsx` — `slug`, `card.title`, `card.tagline`, `card.mediaHref`, `card.image`.
+3. Drop the homepage card image into `public/work/`.
+4. (Optional) Drop section images into `public/work/<slug>/` and reference them via `<CaseStudyImage src="..." />`.
 
 ## What's stubbed and needs to be replaced before deploy
 
 Search the codebase for these markers to find every placeholder. None of these block local dev — they're production polish.
 
-### Content placeholders
-
-- **`app/components/Story.tsx`** — placeholder copy in the "Story" section. Spec says you write this yourself. Two draft starters are in the file comments.
-- **`app/components/Work.tsx`** — Atlas card body is in your voice (placeholder draft); KSM Studio and Meridian Seven copy is AI-draft and needs your edit pass.
-- **`app/components/Background.tsx`** — bio paragraph is AI-draft. Edit to your voice. Specifically confirm the automotive company name treatment (keep generic or name it?).
-- **`app/components/Hero.tsx`** — the positioning line ("Platform PM building agentic AI systems with design sensibility") is the spec's working line. Replace once you settle on the final phrasing.
-
 ### Asset placeholders
 
-- **`public/resume.pdf`** — drop your resume PDF here. The Background section links to it.
-- **`public/work/ksm-studio.png`** — KSM Studio screenshot / architecture diagram. Until added, the WorkCard renders a placeholder pattern.
-- **`public/work/meridian-seven.png`** — Meridian Seven screenshot.
-- **`public/work/atlas.png`** — Atlas mockup (optional for v1).
-
-To wire images: edit `app/components/Work.tsx` and add the `image` prop to each `<WorkCard />`:
-
-```tsx
-image={{ src: "/work/meridian-seven.png", alt: "Meridian Seven globe interface" }}
-```
-
-### Link placeholders (KSM Studio)
-
-In `app/components/Work.tsx`, the KSM Studio links are marked `pending: true` and don't navigate. Once you have:
-
-1. A Loom (or unlisted YouTube) walkthrough recorded → set the "Watch walkthrough" `href`, remove `pending: true`.
-2. A public version of the README → set the "Read README" `href`, remove `pending: true`.
+- **`public/resume.pdf`** — drop your resume PDF here. The About card links to it.
+- Section images for each case study live under `public/work/<slug>/`. Anything missing falls back to a `CaseStudyImage` placeholder showing the expected path, so it's safe to ship with gaps.
 
 ## Design tokens
 
-All in `app/globals.css` under `@theme`. Current palette is warm monochrome — no accent color committed yet (spec rule). When you decide on one, add `--color-accent` to the theme block and apply it sparingly (a single hover state or a single underline color).
+All in `app/globals.css` under `@theme`. Current palette is warm monochrome — no accent color committed yet. When you add one, drop `--color-accent` into the theme block and apply it sparingly (a single hover state or a single underline color).
 
 Typography:
+
 - `.display` — Instrument Serif, used for h1/h2 and hero
 - `.label` — Geist Mono, small caps letterspaced, used for section markers
 - Body — Geist Sans, 17px mobile / 18px desktop, line-height 1.6

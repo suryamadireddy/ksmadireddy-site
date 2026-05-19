@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { HeroIdentityDetails } from "./HeroIdentityDetails";
+import { HeroLinks } from "./HeroLinks";
 
 const HEADLINE_TEXT = `I believe products are remembered not just for what they make possible, but for the experiences they leave behind. When done right, a tool can make work feel effortless, a space can make people feel at ease, and a system can make complexity feel clear. Different mediums, same standard: each moment should feel intentionally designed for the person on the other side. That's the craft.`;
 
@@ -54,7 +54,7 @@ function fitFontSizeForLines(
   return MAX_FONT_PX;
 }
 
-export function HeroCard() {
+export function HeroIntro() {
   const [headline, setHeadline] = useState("");
   const runEpoch = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -152,7 +152,7 @@ export function HeroCard() {
       <div className="flex w-full min-w-0 flex-col items-start gap-16 md:gap-20">
         <div className="min-w-0 self-start">
           <div className="hero-ksm-mark mb-1 md:mb-2">KSM</div>
-          <HeroIdentityDetails />
+          <HeroLinks />
         </div>
 
         <div

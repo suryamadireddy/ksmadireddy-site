@@ -1,4 +1,4 @@
-export function HeroIdentityDetails() {
+export function HeroLinks() {
   return (
     <div className="pl-1 inline-flex w-max max-w-full flex-col items-stretch">
       <span className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--color-fg)]">

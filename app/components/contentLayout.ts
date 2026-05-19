@@ -14,3 +14,8 @@ export const mediaShellBase =
 
 /** Work card images and embeds — fixed min height and clipping. */
 export const mediaShellClass = `${mediaShellBase} min-h-[240px] overflow-hidden sm:min-h-[320px] lg:min-h-[380px]`;
+
+/** Compact variant — same base, no lg+ min-height floor, capped width at lg+
+ * so the 16/10 aspect produces a shorter card. Right-aligned at lg+ so the
+ * holder hugs the column's right edge. Used inside case-study scroll decks. */
+export const mediaShellClassCompact = `${mediaShellBase} min-h-[240px] overflow-hidden sm:min-h-[320px] lg:ml-auto lg:max-w-[32rem]`;
