@@ -74,7 +74,7 @@ const SOLUTIONS = [
       "Each story anchors on the map. Place and proximity are part of comprehension from the first tap — not an afterthought in a sidebar.",
     ],
     image: {
-      src: "/work/meridian/solution-2.png",
+      src: "/work/meridian/newscards.png",
       alt: "Meridian — story exhibits on the globe",
       placeholderLabel: "public/work/meridian/solution-2.png",
     },

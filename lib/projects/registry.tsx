@@ -22,7 +22,7 @@ export const projects: ProjectDefinition[] = [
       tagline:
         "Five stories a day, ranked by real-world impact. Short, factual, no editorializing.",
       image: {
-        src: "/work/meridian-seven.png",
+        src: "/work/meridian.png",
         alt: "Meridian — five stories a day on a globe",
         objectFit: "cover",
       },
