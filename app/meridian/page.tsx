@@ -5,7 +5,6 @@ import {
   CaseStudySection,
 } from "@/app/components/project/ProjectCaseStudy";
 import { ProjectEmbed } from "@/app/components/project/ProjectEmbed";
-import { ProjectShell } from "@/app/components/project/ProjectShell";
 
 export const metadata: Metadata = {
   title: "Meridian | Krishna Surya Madireddy",
@@ -94,7 +93,7 @@ const CONCLUSION = [
 
 export default function MeridianProjectPage() {
   return (
-    <ProjectShell title="MERIDIAN">
+    <>
       <CaseStudySection label="Introduction">
         <CaseStudyProse paragraphs={INTRO} />
         <p className="mt-6 md:mt-8">
@@ -132,6 +131,6 @@ export default function MeridianProjectPage() {
       <CaseStudySection label="Conclusion">
         <CaseStudyProse paragraphs={CONCLUSION} />
       </CaseStudySection>
-    </ProjectShell>
+    </>
   );
 }

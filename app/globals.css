@@ -243,8 +243,8 @@
     line-height: 1.05;
   }
 
-  /* Horizontal-on-desktop / vertical-on-mobile accordion used by /atlas's
-   * Project Specifications section. Mobile default: column of rows whose
+  /* Horizontal-on-desktop / vertical-on-mobile accordion used by the Atlas spec page
+   * (Project Specifications). Mobile default: column of rows whose
    * max-height transitions from collapsed (label only) to expanded (full body).
    * lg+: row of flex-grow tiles whose grow factor transitions on hover/focus,
    * with the collapsed label rotated as a vertical spine. */
@@ -461,4 +461,261 @@
     }
   }
 
+  /* Project evolution thread — three tiles; lg+ equal columns, full copy in each. */
+  .project-thread {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-anchor: none;
+  }
+
+  .project-thread-node {
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    min-height: 60px;
+    transition: flex-grow 450ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 200ms ease, border-color 200ms ease, transform 200ms ease;
+  }
+
+  html.light .project-thread-node[data-state="closed"],
+  :root[data-color-scheme="light"] .project-thread-node[data-state="closed"] {
+    background: color-mix(
+      in srgb,
+      var(--color-bg-elevated) 42%,
+      var(--color-bg)
+    );
+  }
+
+  html:not(.light) .project-thread-node[data-state="closed"],
+  :root:not([data-color-scheme="light"])
+    .project-thread-node[data-state="closed"] {
+    background: color-mix(in srgb, white 5%, var(--color-bg));
+  }
+
+  .project-thread-node--current,
+  .project-thread-node[data-state="open"] {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-border-strong);
+  }
+
+  .project-thread-node--current {
+    cursor: default;
+  }
+
+  a.project-thread-node--current:hover .project-thread-name {
+    text-decoration: none;
+  }
+
+  a.project-thread-node:not(.project-thread-node--current):hover {
+    border-color: var(--color-border-strong);
+  }
+
+  html.light a.project-thread-node:not(.project-thread-node--current):hover,
+  :root[data-color-scheme="light"]
+    a.project-thread-node:not(.project-thread-node--current):hover {
+    background-color: var(--color-bg-elevated);
+  }
+
+  html:not(.light) a.project-thread-node:not(.project-thread-node--current):hover,
+  :root:not([data-color-scheme="light"])
+    a.project-thread-node:not(.project-thread-node--current):hover {
+    background-color: color-mix(in srgb, white 9%, var(--color-bg));
+  }
+
+  a.project-thread-node:not(.project-thread-node--current):hover .project-thread-name {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--color-border-strong);
+  }
+
+  .project-thread-spine {
+    display: none;
+  }
+
+  .project-thread-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0.35rem 0.4rem 0.5rem;
+  }
+
+  .project-thread-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    flex-shrink: 0;
+    margin-bottom: 0.25rem;
+  }
+
+  .project-thread-dot--hollow {
+    box-sizing: border-box;
+    border: 1.25px solid var(--color-fg-subtle);
+    background: transparent;
+  }
+
+  .project-thread-dot--filled {
+    background: var(--color-fg);
+    border: none;
+  }
+
+  .project-thread-year {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--color-fg-subtle);
+    margin-bottom: 0.15rem;
+  }
+
+  .project-thread-name {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-fg);
+    margin-bottom: 0.1rem;
+  }
+
+  .project-thread-desc {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    line-height: 1.25;
+    font-style: italic;
+    color: var(--color-fg-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .project-thread-blurb {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: var(--color-fg-subtle);
+    max-width: 132px;
+    margin: 0;
+  }
+
+  @media (max-width: 1023px) {
+    .project-thread-node[data-state="closed"] {
+      max-height: 60px;
+    }
+
+    .project-thread-node[data-state="closed"] .project-thread-panel {
+      display: none;
+    }
+
+    .project-thread-node[data-state="open"] {
+      max-height: none;
+    }
+
+    .project-thread-spine {
+      display: flex;
+      align-items: center;
+      padding: 1.125rem 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-fg-muted);
+    }
+
+    .project-thread-node[data-state="open"] .project-thread-spine {
+      display: none;
+    }
+
+    .project-thread-node[data-state="open"] .project-thread-panel {
+      display: flex;
+      padding: 0 1.25rem 1.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .project-thread {
+      flex-direction: row;
+      align-items: stretch;
+      height: 260px;
+    }
+
+    .project-thread-node {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 0;
+      flex-grow: 1;
+      min-width: 0;
+      min-height: 0;
+    }
+
+    /* Selected column ~50% width, siblings ~25% each (flex-grow 2 : 1 : 1). */
+    .project-thread-node[data-state="open"] {
+      flex-grow: 2;
+    }
+
+    /* Full tile copy for every step; spine labels are mobile-only. */
+    .project-thread-spine {
+      display: none !important;
+    }
+
+    a.project-thread-node:not(.project-thread-node--current):hover {
+      transform: scale(1.02);
+      transform-origin: center;
+    }
+
+    .project-thread-node .project-thread-panel {
+      display: flex;
+      position: relative;
+      flex: 1 1 auto;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.85rem 0.75rem 1rem;
+      min-height: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
+    }
+
+    .project-thread-blurb {
+      max-width: min(100%, 15rem);
+      width: 100%;
+    }
+  }
+
 }
+
+/* View Transitions — softens client navigations when `document.startViewTransition` runs (ProjectThread links) */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 280ms;
+    animation-timing-function: ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+
+  .project-thread-node {
+    transition-duration: 0s !important;
+  }
+}
+

@@ -42,10 +42,9 @@ Everything visible on the homepage is driven by **`lib/projects/registry.tsx`** 
 Each project gets a route under `app/`. The current set:
 
 - `app/aboutme/page.tsx`
-- `app/atlas/page.tsx`
 - `app/dreamspace/page.tsx`
 - `app/ksm-studio/page.tsx`
-- `app/meridian/page.tsx`
+- `app/meridian/page.tsx` — plus **`app/meridian/layout.tsx`**, which wraps Globetrotter, Meridian, and Atlas in one shell (`Globetrotter` and `Atlas` live at `app/meridian/globetrotter/page.tsx` and `app/meridian/atlas/page.tsx`). Legacy `/atlas` and `/globetrotter` URLs redirect to `/meridian/atlas` and `/meridian/globetrotter`.
 - `app/placemaking/page.tsx`
 
 Pages share a small set of case-study primitives from `app/components/project/`:

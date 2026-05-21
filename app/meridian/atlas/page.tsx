@@ -8,7 +8,6 @@ import {
   CaseStudyProse,
   CaseStudySection,
 } from "@/app/components/project/ProjectCaseStudy";
-import { ProjectShell } from "@/app/components/project/ProjectShell";
 
 export const metadata: Metadata = {
   title: "Atlas — Spec | Krishna Surya Madireddy",
@@ -355,7 +354,7 @@ const SPEC_TILES: SpecTile[] = [
 
 export default function AtlasProjectPage() {
   return (
-    <ProjectShell title="ATLAS">
+    <>
       <CaseStudySection label="Introduction">
         <CaseStudyProse paragraphs={INTRO} />
       </CaseStudySection>
@@ -385,6 +384,6 @@ export default function AtlasProjectPage() {
         deckId="specifications"
         deckLabel="Project Specifications"
       />
-    </ProjectShell>
+    </>
   );
 }

@@ -29,25 +29,6 @@ export const projects: ProjectDefinition[] = [
     },
   },
   {
-    slug: "atlas",
-    card: {
-      title: "Atlas",
-      tagline: (
-        <>
-          A queryable globe. Evolved from Meridian.
-          <br />
-          Open spec - Still in development.
-        </>
-      ),
-      mediaHref: "/atlas",
-      image: {
-        src: "/work/atlas-card.png",
-        alt: "Atlas — queryable globe and working spec",
-        objectFit: "cover",
-      },
-    },
-  },
-  {
     slug: "dreamspace",
     card: {
       title: "DreamSpace",
