@@ -15,15 +15,15 @@ export const metadata: Metadata = {
 const MERIDIAN_LIVE = "https://the-meridian-seven.vercel.app";
 
 const INTRO = [
-  "Meridian is a response to how news is consumed today. Most products optimize for volume and engagement — not for understanding what actually matters, or where events sit in the world.",
-  "I built Meridian Seven to test a different contract with the reader: a small, fixed set of stories each day, ranked by real-world impact, anchored on a globe.",
+  "Meridian is a response to how news is consumed today. Most news products optimize for volume, speed, and engagement — not for helping readers understand what actually matters or where events sit in the world.",
+  "I built Meridian Seven to test a different contract with the reader: a small, fixed set of globally significant stories each day, ranked by real-world impact and anchored on an interactive globe.",
 ];
 
 const PROBLEMS = [
   {
     title: "Feed overload",
     paragraphs: [
-      "Infinite scroll and push alerts train urgency, not understanding. Most stories never earn attention proportional to their impact — the feed wins by being endless, not by being useful.",
+      "News feeds are built to hold your attention, not reward it. The result is a familiar paradox: the more you read, the less you retain. A surplus of headlines, a deficit of actual insight.",
     ],
     image: {
       src: "/work/meridian/overload.png",
@@ -32,9 +32,9 @@ const PROBLEMS = [
     },
   },
   {
-    title: "Engagement over impact",
+    title: "Engagement trap",
     paragraphs: [
-      "Ranking by clicks and outrage optimizes for reaction, not consequence. The important story and the loud story diverge — and readers learn to chase noise.",
+      "Algorithms optimize for clicks, shares, and outrage. Not consequence. The stories that travel fastest are rarely the ones that matter most.",
     ],
     image: {
       src: "/work/meridian/clickbait.png",
@@ -43,9 +43,9 @@ const PROBLEMS = [
     },
   },
   {
-    title: "News without place",
+    title: "Geographic Gap",
     paragraphs: [
-      "Headlines strip geography and systems. Readers finish an article without a mental map of where events sit — context is optional, not structural.",
+      "News is inherently geographic. A conflict means something different when you can see what borders it, what it neighbors, what it threatens. Most news gives you none of that.",
     ],
     image: {
       src: "/work/meridian/locationstruggle.png",
@@ -59,7 +59,7 @@ const SOLUTIONS = [
   {
     title: "Five stories, impact-ranked",
     paragraphs: [
-      "A fixed daily set — five stories, scored for real-world significance. Copy is short, wire-service in tone, with no editorializing. The reader knows the scope before they start.",
+      "A bounded brief instead of an infinite feed: five stories a day, chosen for real-world significance. The constraint is the point. Readers know the scope before they start, and each story is written to inform, not provoke.",
     ],
     image: {
       src: "/work/meridian/impactfulfive.png",
@@ -70,7 +70,7 @@ const SOLUTIONS = [
   {
     title: "Globe as context",
     paragraphs: [
-      "Each story anchors on the map. Place and proximity are part of comprehension from the first tap — not an afterthought in a sidebar.",
+      "Meridian makes geography part of reading, not an afterthought. Each story is anchored on the globe so readers can see where it happens, what borders it, and how proximity shapes what it means.",
     ],
     image: {
       src: "/work/meridian/newscards.png",
@@ -81,14 +81,13 @@ const SOLUTIONS = [
 ];
 
 const FUTURE_PLAN = [
-  "Sharpen impact ranking with better signals — source diversity, geographic spread, and persistence over the news cycle.",
-  "Richer exhibits: deeper sourcing, clearer exhibit hierarchy, and smoother transitions between globe and copy.",
-  "Fork the spatial-knowledge layer into Atlas (evergreen, queryable globe) while Meridian stays focused on daily news.",
+  "Sharpen impact scoring by integrating deeper signals: source diversity, geographic spread, and the long-term persistence of a story.",
+  "Personalized filters: transforming the map into a tailored exhibit, focusing on the subjects and regions that matter most to the reader.",
+  "3D visualizations instead of pins. Imagine seeing an F1 car on the circuit or a cargo ship in the Strait of Hormuz, transforming the map from a collection of markers into a living reflection of global activity.",
 ];
 
 const CONCLUSION = [
-  "Meridian Seven was a learning artifact as much as a product. It validated the globe + exhibit pattern and proved I could ship a full stack — ingestion, ranking, synthesis, and UI — on my own.",
-  "The iteration story matters: I used Meridian, realized news wasn’t the framing I wanted long-term, and wrote the Atlas spec from what worked. That’s the arc I’d want a hiring manager to see.",
+  "Meridian proved the globe is a powerful interface for information. But it also raised a bigger question: if a map can clarify today’s news, what else can it illuminate? The same spatial logic applies to everything that shapes our world, from trade routes and mineral deposits to the rise and fall of empires. Everything that matters happens somewhere. Atlas is the realization of that broader vision.",
 ];
 
 export default function MeridianProjectPage() {
