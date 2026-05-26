@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 const MERIDIAN_LIVE = "https://the-meridian-seven.vercel.app";
 
 const INTRO = [
-  "Meridian is a response to how news is consumed today. Most news products optimize for volume, speed, and engagement — not for helping readers understand what actually matters or where events sit in the world.",
-  "I built Meridian Seven to test a different contract with the reader: a small, fixed set of globally significant stories each day, ranked by real-world impact and anchored on an interactive globe.",
+  "News products are built for your attention. Not your understanding.",
+"Meridian is built on the opposite contract: five stories a day, chosen for real-world impact, anchored to a globe at the place each one happens. The scope is fixed. You read it once, and you're done.",
 ];
 
 const PROBLEMS = [
@@ -87,7 +87,7 @@ const FUTURE_PLAN = [
 ];
 
 const CONCLUSION = [
-  "Meridian proved the globe is a powerful interface for information. But it also raised a bigger question: if a map can clarify today’s news, what else can it illuminate? The same spatial logic applies to everything that shapes our world, from trade routes and mineral deposits to the rise and fall of empires. Everything that matters happens somewhere. Atlas is the realization of that broader vision.",
+  "Meridian proved the globe is a powerful interface for information. But it raised a bigger question. If a map can clarify today's news, what else can it illuminate? The same spatial logic applies to everything that shapes the world: trade routes, mineral deposits, the rise and fall of empires. Everything that matters happens somewhere. Atlas is what the globe becomes when news is just the beginning.",
 ];
 
 export default function MeridianProjectPage() {

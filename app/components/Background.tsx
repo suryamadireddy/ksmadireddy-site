@@ -15,7 +15,7 @@ export function Background() {
         </p>
         <p>
           In December 2024 I left to build. Seventeen months across the U.S.,
-          India, and Southeast Asia — building KSM Studio, running y for a
+          India, and Southeast Asia — building The Kiln, running y for a
           marketplace startup in Hyderabad, studying placemaking across Asia and
           Europe. The thread across all of it is the same instinct: platform
           thinking applied to new contexts.

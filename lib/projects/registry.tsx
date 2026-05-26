@@ -2,15 +2,15 @@ import type { ProjectDefinition } from "./types";
 
 export const projects: ProjectDefinition[] = [
   {
-    slug: "ksm-studio",
+    slug: "kiln",
     card: {
-      title: "KSM Studio",
+      title: "The Kiln",
       tagline:
-        "Agentic pipeline that evaluates raw ideas and turns them into a builder-ready briefs.",
-      mediaHref: "/ksm-studio",
+        "A three-phase agentic pipeline that fires a raw idea into a build-ready brief.",
+      mediaHref: "/kiln",
       image: {
-        src: "/work/ksm-studio.svg",
-        alt: "KSM Studio — four-tier agent pipeline architecture",
+        src: "/work/kiln.svg",
+        alt: "The Kiln — three-phase agent pipeline",
       },
     },
   },

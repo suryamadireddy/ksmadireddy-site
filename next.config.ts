@@ -24,6 +24,26 @@ const nextConfig: NextConfig = {
         destination: "/meridian/atlas/:path*",
         permanent: true,
       },
+      {
+        source: "/ksm-studio",
+        destination: "/kiln",
+        permanent: true,
+      },
+      {
+        source: "/ksm-studio/:path*",
+        destination: "/kiln/:path*",
+        permanent: true,
+      },
+      {
+        source: "/thekiln",
+        destination: "/kiln",
+        permanent: true,
+      },
+      {
+        source: "/thekiln/:path*",
+        destination: "/kiln/:path*",
+        permanent: true,
+      },
     ];
   },
 };

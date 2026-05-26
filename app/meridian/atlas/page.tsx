@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 };
 
 const INTRO = [
-  "Atlas isn’t built yet. This is the spec I’m working from, posted because the iteration story — built Meridian Seven, used it, realized news wasn’t the framing I wanted — is most of what I’d want a hiring manager to see.",
-  "Atlas is a queryable atlas of how the world works. A spatial-knowledge interface where curious people land on a globe and explore — by querying in natural language (“show me cobalt mines,” “show me the Silk Road in 200 CE,” “show me species ranges in Borneo”) and getting beautiful, accurate, on-globe visualizations with concise sourced context.",
-  "Atlas is forked from Meridian Seven, which remains the news-visualization product. Atlas inherits Meridian’s technical patterns but has its own codebase, identity, and content. News is not a layer in Atlas — that’s Meridian’s job. Atlas is evergreen.",
+  "Atlas isn't built yet. What follows is the working spec: the document I'd hand a team on day one. It's posted because the thinking behind a product is its own kind of artifact, and because the path that led here, from Globetrotter to Meridian to Atlas, is worth following in full.",
+  "Atlas is a queryable interface of how the world works. A spatial-knowledge interface where curious people can land on a globe and explore using natural language (“show me cobalt mines,” “show me the Silk Road in 200 CE,” “show me species ranges in Borneo”) and get beautiful, accurate, on-globe visualizations with concise sourced context.",
+  "Atlas is forked from Meridian, which remains the news-visualization product. Atlas inherits Meridian’s technical patterns but has its own codebase, identity, and content. News is not a layer in Atlas — that’s Meridian’s job. Atlas is evergreen.",
   "Mental model: Google Earth used like Google. A beautiful globe; a query bar that turns natural language into the right visualization, layered over real data.",
 ];
 
@@ -35,8 +35,8 @@ const CONSIDERATIONS = [
 ];
 
 const CONCLUSIONS = [
-  "I built Meridian Seven to test a hypothesis about news. The hypothesis held — but the framing didn’t. A few weeks of reading my own product made it obvious that I cared more about the globe than the headlines.",
-  "Atlas is what I’d ship if I started over. Same spatial-knowledge engine, different framing — evergreen instead of daily, queryable instead of curated, atlas instead of feed. Meridian is the artifact that taught me what to build next.",
+  "I built Meridian to test an idea about news. The idea held. The framing didn't. A few weeks of reading my own product made it obvious that I cared more about the globe than the headlines.",
+  "Atlas is what I'd ship if I started over. Same spatial-knowledge engine, different framing: evergreen instead of daily, queryable instead of curated, atlas instead of feed. Meridian is the artifact that taught me what to build next.",
   "This page is the working spec, not a pitch deck. If a part of it is wrong, I’d rather find out now than after I’ve built it.",
 ];
 
