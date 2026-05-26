@@ -8,6 +8,7 @@ import {
   CaseStudyProse,
   CaseStudySection,
 } from "@/app/components/project/ProjectCaseStudy";
+import KilnRunDemo from "@/app/kiln/KilnRunDemo";
 import { ProjectShell } from "@/app/components/project/ProjectShell";
 
 export const metadata: Metadata = {
@@ -66,7 +67,7 @@ const PIPELINE = [
 ];
 
 const SEE_IT_RUN = [
-  "A walkthrough of the Kiln in motion will sit here — a recorded run through the three phases, and a guided, interactive demo of a single idea moving down the pipeline. Both are in progress.",
+  "The demo below is canned — no API calls — but it follows the same gate logic as the live Kiln. The Evaluator can stop a weak idea before research or drafting run; ideas that clear move through all five phases, with the last two shown as designed rather than built.",
 ];
 
 const WORKED_EXAMPLE = [
@@ -181,12 +182,12 @@ export default function KilnPage() {
 
       <CaseStudySection label="See it run">
         <CaseStudyProse paragraphs={SEE_IT_RUN} />
-        {/*
-          Once the demo and Loom are ready, drop the embed in here:
-          <ProjectEmbed src={KILN_DEMO_URL} title="The Kiln — guided demo" />
-          (import ProjectEmbed from "@/app/components/project/ProjectEmbed")
-        */}
+        <div className="mt-8 md:mt-10 rounded-md border border-[var(--color-border)] overflow-hidden">
+          <KilnRunDemo />
+        </div>
       </CaseStudySection>
+
+      {/* Future: CaseStudySection "Talk to the Evaluator" — live evaluator-only demo */}
 
       <CaseStudySection label="Worked example">
         <CaseStudyProse paragraphs={WORKED_EXAMPLE} />
