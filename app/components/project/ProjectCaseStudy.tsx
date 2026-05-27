@@ -4,15 +4,19 @@ type CaseStudySectionProps = {
   label: string;
   title?: string;
   children: ReactNode;
+  className?: string;
 };
 
 export function CaseStudySection({
   label,
   title,
   children,
+  className,
 }: CaseStudySectionProps) {
   return (
-    <section className="case-study-section-rail">
+    <section
+      className={["case-study-section-rail", className].filter(Boolean).join(" ")}
+    >
       <header className="case-study-deck-header mb-6">
         <span className="label case-study-section-label">{label}</span>
         {title ? (

@@ -467,77 +467,144 @@ const STYLES = `
 
 .kiln-demo__inner { max-width: var(--kiln-maxw); margin: 0 auto; }
 
-/* ---- lead ---- */
-.kiln-lead {
+/* ---- idea picker: marks | idea panel | run ---- */
+.kiln-picker {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.5rem;
+  align-items: stretch;
+  margin-bottom: 2.25rem;
+  min-height: 12rem;
+}
+.kiln-marks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: none;
+}
+.kiln-mark {
+  flex: 1 1 0;
+  min-height: 2.75rem;
+  min-width: 3.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--kiln-font-display);
-  font-weight: 400;
-  font-size: clamp(1.35rem, 1rem + 1.4vw, 1.85rem);
-  line-height: 1.32;
-  color: var(--kiln-ink-soft);
-  margin: 0 0 1.9rem;
-  max-width: 34ch;
-}
-.kiln-lead em { font-style: italic; color: var(--kiln-ink); }
-
-/* ---- chips ---- */
-.kiln-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.85rem; }
-.kiln-chip {
-  display: inline-flex; align-items: baseline; gap: 0.55rem;
-  font-family: var(--kiln-font-sans);
-  font-size: 0.86rem; line-height: 1.2; color: var(--kiln-ink-soft);
-  background: var(--kiln-surface);
-  border: 1px solid var(--kiln-line-strong);
-  border-radius: var(--kiln-radius);
-  padding: 0.62rem 0.85rem;
-  cursor: pointer;
-  transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
-}
-.kiln-chip:hover:not(:disabled) { border-color: var(--kiln-ink-faint); color: var(--kiln-ink); }
-.kiln-chip:disabled { cursor: default; }
-.kiln-chip__mark {
-  font-family: var(--kiln-font-display); font-size: 1rem; font-style: italic;
+  font-size: 1.35rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1;
   color: var(--kiln-ink-faint);
+  background: color-mix(in srgb, var(--kiln-surface) 92%, var(--kiln-line));
+  border: 1px solid var(--kiln-line-strong);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
 }
-.kiln-chip--on {
-  border-color: var(--kiln-accent);
-  background: var(--kiln-accent-wash);
+.kiln-mark:hover:not(:disabled):not(.kiln-mark--on) {
   color: var(--kiln-ink);
+  border-color: var(--kiln-line);
+  background: color-mix(in srgb, var(--kiln-surface) 70%, var(--kiln-accent-wash));
 }
-.kiln-chip--on .kiln-chip__mark { color: var(--kiln-accent-deep); }
-
-.kiln-chips__hint {
-  font-size: 0.78rem; color: var(--kiln-ink-faint);
-  margin: 0 0 1.6rem; line-height: 1.5;
+.kiln-mark:disabled {
+  cursor: default;
+  opacity: 0.55;
 }
-
-/* ---- prompt block ---- */
-.kiln-prompt {
-  border-left: 2px solid var(--kiln-accent);
-  padding: 0.15rem 0 0.15rem 1.05rem;
-  margin: 0 0 1.5rem;
+.kiln-mark--on {
+  color: var(--kiln-accent-deep);
+  background: var(--kiln-surface);
+  border-color: var(--kiln-accent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--kiln-accent) 35%, transparent);
 }
-.kiln-kicker {
-  font-family: var(--kiln-font-sans); font-size: 0.66rem; font-weight: 500;
-  letter-spacing: 0.17em; text-transform: uppercase; color: var(--kiln-ink-faint);
+.kiln-idea-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-width: 0;
+  min-height: 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--kiln-line-strong);
+  border-radius: 6px;
+  background: var(--kiln-surface);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 }
-.kiln-prompt__text {
-  font-family: var(--kiln-font-serif); font-size: 1.04rem; line-height: 1.55;
-  color: var(--kiln-ink); margin: 0.4rem 0 0;
+.kiln-idea-panel--empty {
+  background: color-mix(in srgb, var(--kiln-surface) 92%, var(--kiln-line));
 }
-
-/* ---- run button ---- */
-.kiln-runrow { margin-bottom: 2.25rem; }
+.kiln-idea-index {
+  font-family: var(--kiln-font-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--kiln-ink-faint);
+  margin-bottom: 0.12rem;
+}
+.kiln-idea-name {
+  font-family: var(--kiln-font-display);
+  font-weight: 500;
+  font-size: 1.05rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--kiln-ink);
+  margin-bottom: 0.35rem;
+  max-width: 100%;
+}
+.kiln-idea-desc {
+  font-family: var(--kiln-font-sans);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: var(--kiln-ink-soft);
+  margin: 0;
+  max-width: min(100%, 36rem);
+}
+.kiln-run-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 7.5rem;
+}
 .kiln-run {
-  font-family: var(--kiln-font-sans); font-size: 0.78rem; font-weight: 500;
-  letter-spacing: 0.07em; text-transform: uppercase;
-  color: var(--kiln-bg); background: var(--kiln-accent);
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  font-family: var(--kiln-font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--kiln-bg);
+  background: var(--kiln-accent);
   border: 1px solid var(--kiln-accent);
   border-radius: var(--kiln-radius);
-  padding: 0.72rem 1.5rem; cursor: pointer;
-  transition: background-color 160ms ease, opacity 160ms ease;
+  padding: 0.72rem 1.25rem;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
 }
-.kiln-run:hover:not(:disabled) { background: var(--kiln-accent-deep); }
-.kiln-run:disabled { cursor: default; opacity: 0.45; }
+.kiln-run:hover:not(:disabled) {
+  background: var(--kiln-accent-deep);
+  border-color: var(--kiln-accent-deep);
+}
+.kiln-run:disabled {
+  cursor: default;
+  color: var(--kiln-ink-faint);
+  background: var(--kiln-line);
+  border-color: var(--kiln-line-strong);
+  opacity: 1;
+}
+
+@media (min-width: 1024px) {
+  .kiln-picker {
+    min-height: 220px;
+  }
+}
 
 /* ---- rail ---- */
 .kiln-rail { display: flex; flex-direction: column; }
@@ -592,7 +659,7 @@ const STYLES = `
 .kiln-phase__tag--designed { color: var(--kiln-accent-deep); border: 1px dashed var(--kiln-accent); }
 .kiln-phase__desc {
   font-family: var(--kiln-font-serif); font-size: 0.92rem; line-height: 1.5;
-  color: var(--kiln-ink-soft); margin: 0.45rem 0 0; max-width: 56ch;
+  color: var(--kiln-ink-soft); margin: 0.45rem 0 0; width: 100%; max-width: none;
 }
 .kiln-phase__body { margin-top: 0.95rem; }
 
@@ -615,6 +682,10 @@ const STYLES = `
   padding: 1.3rem 1.4rem;
   box-shadow: 0 1px 2px rgba(33, 31, 26, 0.035);
   animation: kilnReveal 460ms ease both;
+}
+.kiln-kicker {
+  font-family: var(--kiln-font-sans); font-size: 0.66rem; font-weight: 500;
+  letter-spacing: 0.17em; text-transform: uppercase; color: var(--kiln-ink-faint);
 }
 .kiln-card__kicker { display: block; margin-bottom: 0.5rem; }
 
@@ -745,14 +816,6 @@ const STYLES = `
   line-height: 1.5; color: var(--kiln-ink-faint); margin: 0;
 }
 
-/* run summary */
-.kiln-summary {
-  font-family: var(--kiln-font-sans); font-size: 0.78rem; line-height: 1.55;
-  color: var(--kiln-ink-faint);
-  margin: 1.9rem 0 0; padding-top: 1.05rem;
-  border-top: 1px solid var(--kiln-line);
-}
-
 /* ---- motion ---- */
 @keyframes kilnPulse {
   0%, 100% { opacity: 0.32; transform: scale(0.82); }
@@ -772,6 +835,9 @@ const STYLES = `
   .kiln-card, .kiln-designed, .kiln-skipped-card { animation: none; }
   .kiln-node--processing { animation: none; }
   .kiln-pulse { animation: none; opacity: 1; }
+  .kiln-mark {
+    transition-duration: 0s !important;
+  }
 }
 
 /* ---- narrow widths ---- */
@@ -780,6 +846,26 @@ const STYLES = `
   .kiln-row { column-gap: 0.8rem; }
   .kiln-demo { --kiln-spine: 44px; }
   .kiln-phase__name { font-size: 1.3rem; }
+  .kiln-picker {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
+    min-height: 10rem;
+  }
+  .kiln-marks {
+    grid-row: 1 / 3;
+  }
+  .kiln-idea-panel {
+    grid-column: 2;
+    min-height: 8rem;
+  }
+  .kiln-run-panel {
+    grid-column: 2;
+    min-width: 0;
+  }
+  .kiln-run {
+    min-height: 3rem;
+    width: 100%;
+  }
 }
 `;
 
@@ -806,7 +892,9 @@ function EvaluatorCard({ data }: { data: EvaluatorOutput }) {
       <div className="kiln-dims">
         {data.dimensions.map((d) => (
           <div className="kiln-dim" key={d.name}>
-            <span className={`kiln-pill kiln-pill--${d.status}`}>{d.status}</span>
+            <span className={`kiln-pill kiln-pill--${d.status}`}>
+              {d.status}
+            </span>
             <div className="kiln-dim__text">
               <p className="kiln-dim__name">{d.name}</p>
               <p className="kiln-dim__note">{d.note}</p>
@@ -822,7 +910,9 @@ function EvaluatorCard({ data }: { data: EvaluatorOutput }) {
 function ResearcherCard({ data }: { data: ResearcherOutput }) {
   return (
     <div className="kiln-card">
-      <span className="kiln-kicker kiln-card__kicker">Researcher · Findings</span>
+      <span className="kiln-kicker kiln-card__kicker">
+        Researcher · Findings
+      </span>
       <div className="kiln-findings">
         {data.findings?.map((f) => (
           <div key={f.label}>
@@ -924,7 +1014,7 @@ export default function KilnRunDemo() {
     clearTimers();
     setStatus(idleStatus());
     setRunState("idle");
-    setSelectedId(id);
+    setSelectedId((current) => (current === id ? null : id));
   };
 
   const run = () => {
@@ -964,11 +1054,8 @@ export default function KilnRunDemo() {
     runState === "running"
       ? "Running…"
       : runState === "done"
-      ? "Run again"
-      : "Run the Kiln";
-
-  const stopped =
-    runState === "done" && selected?.evaluator.verdictKind === "stopped";
+        ? "Run again"
+        : "Run the Kiln";
 
   /* connector is lit once the run has reached past that phase */
   const lineLit = (s: Status) => s === "done" || s === "skipped";
@@ -1012,54 +1099,51 @@ export default function KilnRunDemo() {
     <div className="kiln-demo">
       <style>{STYLES}</style>
       <div className="kiln-demo__inner">
-        <p className="kiln-lead">
-          Pick an idea. Watch the Kiln carry it from a single sentence to a
-          build-ready brief — or <em>stop it</em> before it gets there.
-        </p>
-
-        {/* idea picker */}
-        <div className="kiln-chips" role="group" aria-label="Example ideas">
-          {IDEAS.map((idea) => (
-            <button
-              key={idea.id}
-              type="button"
-              className={
-                "kiln-chip" + (idea.id === selectedId ? " kiln-chip--on" : "")
-              }
-              aria-pressed={idea.id === selectedId}
-              disabled={runState === "running"}
-              onClick={() => pickIdea(idea.id)}
-            >
-              <span className="kiln-chip__mark" aria-hidden="true">
-                {idea.mark}
-              </span>
-              <span>{idea.chip}</span>
-            </button>
-          ))}
-        </div>
-        <p className="kiln-chips__hint">
-          Three ideas, calibrated to different quality. One sails through, one
-          gets flagged but survives, and one the Evaluator stops cold.
-        </p>
-
-        {/* selected idea */}
-        {selected && (
-          <div className="kiln-prompt">
-            <span className="kiln-kicker">The idea</span>
-            <p className="kiln-prompt__text">{selected.prompt}</p>
+        <div className="kiln-picker">
+          <div className="kiln-marks" role="group" aria-label="Example ideas">
+            {IDEAS.map((idea) => {
+              const isOn = idea.id === selectedId;
+              return (
+                <button
+                  key={idea.id}
+                  type="button"
+                  className={"kiln-mark" + (isOn ? " kiln-mark--on" : "")}
+                  aria-pressed={isOn}
+                  aria-label={`Idea ${idea.mark}: ${idea.chip}`}
+                  disabled={runState === "running"}
+                  onClick={() => pickIdea(idea.id)}
+                >
+                  {idea.mark}
+                </button>
+              );
+            })}
           </div>
-        )}
 
-        {/* run */}
-        <div className="kiln-runrow">
-          <button
-            type="button"
-            className="kiln-run"
-            disabled={!selected || runState === "running"}
-            onClick={run}
+          <div
+            className={
+              "kiln-idea-panel" + (selected ? "" : " kiln-idea-panel--empty")
+            }
+            aria-live="polite"
           >
-            {runLabel}
-          </button>
+            {selected ? (
+              <>
+                <span className="kiln-idea-index">Example {selected.mark}</span>
+                <span className="kiln-idea-name">{selected.chip}</span>
+                <p className="kiln-idea-desc">{selected.prompt}</p>
+              </>
+            ) : null}
+          </div>
+
+          <div className="kiln-run-panel">
+            <button
+              type="button"
+              className="kiln-run"
+              disabled={!selected || runState === "running"}
+              onClick={run}
+            >
+              {runLabel}
+            </button>
+          </div>
         </div>
 
         {/* phase rail */}
@@ -1073,9 +1157,7 @@ export default function KilnRunDemo() {
                 <div className="kiln-spine" aria-hidden="true">
                   <span className="kiln-spine__num">{phase.index}</span>
                   <span className={nodeClass(phase, s)}>
-                    {s === "skipped" && (
-                      <span className="kiln-node__dash" />
-                    )}
+                    {s === "skipped" && <span className="kiln-node__dash" />}
                   </span>
                   {!isLast && (
                     <span
@@ -1105,15 +1187,6 @@ export default function KilnRunDemo() {
             );
           })}
         </div>
-
-        {/* run summary */}
-        {runState === "done" && (
-          <p className="kiln-summary">
-            {stopped
-              ? "The Kiln stopped at the Evaluator. Nothing downstream ran \u2014 by design. A weak idea is caught in the first phase, before research or drafting spends any effort on it."
-              : "Three phases ran end to end \u2014 the Evaluator, the Researcher, and the Artifact Creator. The last two, Builder and Deployer, are designed and waiting; the demo shows the full five-phase arc, built or not."}
-          </p>
-        )}
       </div>
     </div>
   );
