@@ -29,8 +29,8 @@ const PIPELINE = [
   {
     title: "Evaluator",
     paragraphs: [
-      "The Evaluator interrogates the idea before anything else is allowed to happen. It runs a Socratic stress-test across six dimensions — problem clarity, impact mechanism, effort realism, falsifiability, founder-idea fit, and commercial viability — hunting for the weak points rather than confirmation. It is adversarial by design. Its job is to try to break the idea, and to tell you plainly if it succeeds.",
-      "Its scoring stays internal. You do not see the numbers during the interview, and the public exhibit never shows them — but the scores are retained, so the Evaluator can re-evaluate an idea later if it genuinely improves.",
+      "The Evaluator is Kiln’s Socratic stress test: adversarial by design, but in service of sharper ideas. It challenges the idea across six dimensions: clarity, impact, effort, falsifiability, founder fit, and viability, looking for its weakest links.",
+      "Each run is scored and saved. When the idea returns, the Evaluator runs the same test again. The delta shows what actually improved, what stayed fragile, and whether the reasoning got stronger or only the language did.",
     ],
     image: {
       src: "/work/kiln/evaluator.png",
@@ -41,7 +41,8 @@ const PIPELINE = [
   {
     title: "Researcher",
     paragraphs: [
-      "Once an idea survives the Evaluator, the Researcher changes the relationship. Where the Evaluator challenged the idea, the Researcher grounds it — running web-grounded market and product research to build the factual foundation the rest of the pipeline stands on. It stays constructive, but it will still contradict the idea where the evidence demands it. A research pass that only confirms what you already believed is worthless.",
+      "Once an idea clears the Evaluator, the Researcher grounds it in evidence. It pulls from market research, competitors, and user signals to build the foundation for the rest of the pipeline.",
+      "It is constructive, not confirmatory — strengthening what the evidence supports and challenging what it does not.",
     ],
     image: {
       src: "/work/kiln/researcher.png",
@@ -52,7 +53,8 @@ const PIPELINE = [
   {
     title: "Artifact Creator",
     paragraphs: [
-      "The Artifact Creator turns the grounded idea into working documents through four sequential stages — a PRD, an MVP scope, next steps, and a builder brief. These are not summaries. They are working specifications, and the builder brief is written to be handed directly to a build tool like Claude Code or v0.",
+      "The Artifact Creator turns evidence into product direction and working documents: a Product Strategy Brief, MVP Definition, PRD, User Journey, and Metrics Plan.",
+      "These are not summaries. They are execution-ready artifacts, written to make decisions explicit and give the Builder enough structure to create prototypes without guessing.",
     ],
     image: {
       src: "/work/kiln/artifact-creator.png",
@@ -95,7 +97,10 @@ export default function KilnPage() {
         deckLabel="The Pipeline"
       />
 
-      <CaseStudySection label="Demo" className="case-study-section-rail--kiln-demo">
+      <CaseStudySection
+        label="Demo"
+        className="case-study-section-rail--kiln-demo"
+      >
         <CaseStudyProse paragraphs={DEMO} />
         <div className="mt-8 md:mt-10 rounded-md border border-[var(--color-border)] overflow-hidden">
           <KilnRunDemo />
