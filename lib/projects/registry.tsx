@@ -2,15 +2,15 @@ import type { ProjectDefinition } from "./types";
 
 export const projects: ProjectDefinition[] = [
   {
-    slug: "kiln",
+    slug: "atelier",
     card: {
-      title: "The Kiln",
+      title: "Atelier",
       tagline:
-        "A three-phase agentic pipeline that fires a raw idea into a build-ready brief.",
-      mediaHref: "/kiln",
+        "A studio that judges raw ideas, builds the good ones, and throws away the rest.",
+      mediaHref: "/atelier",
       image: {
         src: "/work/kiln.svg",
-        alt: "The Kiln — three-phase agent pipeline",
+        alt: "Atelier — a studio for turning ideas into things",
       },
     },
   },

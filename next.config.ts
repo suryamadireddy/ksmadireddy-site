@@ -26,12 +26,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/ksm-studio",
-        destination: "/kiln",
+        destination: "/atelier",
         permanent: true,
       },
       {
         source: "/ksm-studio/:path*",
-        destination: "/kiln/:path*",
+        destination: "/atelier/:path*",
         permanent: true,
       },
       {

@@ -7,6 +7,7 @@ import {
 import KilnRunDemo from "@/app/kiln/KilnRunDemo";
 import { ProjectShell } from "@/app/components/project/ProjectShell";
 import EvaluatorChat from "@/app/components/kiln/EvaluatorChat";
+import { AtelierKilnThread } from "@/app/components/project/AtelierKilnThread";
 
 export const metadata: Metadata = {
   title: "The Kiln | Krishna Surya Madireddy",
@@ -24,15 +25,15 @@ const PIPELINE_GRID =
   "grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[minmax(0,32rem)_minmax(0,1fr)] xl:gap-12";
 
 const INTRO = [
-  "The Kiln is an agentic pipeline that turns a raw idea into a builder brief precise enough to hand straight to a build tool.",
-  "I built it because the stretch between having an idea and having something myself ora team can actually build is the slowest and least reliable part of the process. My attempt to make that stretch fast, rigorous, and repeatable. And to be harder on my own ideas than I manage to be on my own.",
+  "The Kiln is a pipeline that turns a raw idea into a builder brief precise enough to hand straight to a build tool.",
+  "I built it because the stretch between having an idea and having something a team can actually build is the slowest and least reliable part of the process. My attempt to make that stretch fast, rigorous, and repeatable. And to be harder on my own ideas than I manage to be on my own.",
 ];
 
 const EVALUATOR = {
   title: "Evaluator",
   paragraphs: [
-    "The Evaluator is Kiln's Socratic stress test: adversarial by design, but in service of sharper ideas. It challenges the idea across six dimensions: clarity, impact, effort, falsifiability, founder fit, and viability, looking for its weakest links.",
-    "Each run is scored and saved. When the idea returns, the Evaluator runs the same test again. The delta shows what actually improved, what stayed fragile, and whether the reasoning got stronger or only the language did.",
+    "The Evaluator is Kiln's Socratic stress test: adversarial by design, but in service of sharper ideas. It challenges the idea across six dimensions — clarity, impact, effort, falsifiability, founder fit, and viability — finding the weakest links.",
+    "Each run is scored and saved: effort, impact, confidence, and the kill assumptions most likely to break the idea. When the idea returns, the Evaluator re-runs against its full history — prior scores, prior assumptions, and how the thinking has changed between sessions. The delta is the signal.",
   ],
 };
 
@@ -40,7 +41,7 @@ const PIPELINE_REST = [
   {
     title: "Researcher",
     paragraphs: [
-      "Once an idea clears the Evaluator, the Researcher grounds it in evidence. It pulls from market research, competitors, and user signals to build the foundation for the rest of the pipeline. It is constructive, not confirmatory - strengthening what the evidence supports and challenging what it does not.",
+      "Once an idea clears the Evaluator, the Researcher grounds it in evidence. It pulls from market research, competitors, and user signals to build the foundation for the rest of the pipeline. It is constructive, not confirmatory — strengthening what the evidence supports and challenging what it does not.",
     ],
   },
   {
@@ -54,24 +55,6 @@ const PIPELINE_REST = [
       alt: "The Artifact Creator — PRD, MVP scope, next steps, and builder brief",
       placeholderLabel: "public/work/kiln/artifact-creator.png",
     },
-  },
-  {
-    title: "Builder",
-    paragraphs: [
-      "Would take the finished brief and turn it into four prototype directions, each one a visual tile, a different reading of the same MVP. Select one, blend two, or fine-tune from there.",
-      "The brief stops being something you read and becomes something you can see and react to.",
-    ],
-    image: {
-      src: "/work/kiln/builder.png",
-      alt: "The Builder — four prototype directions from the finished brief",
-      placeholderLabel: "public/work/kiln/builder.png",
-    },
-  },
-  {
-    title: "Deployer",
-    paragraphs: [
-      "The Deployer stands up a repository from the chosen prototype and hands it to an IDE like Cursor. The point where Kiln's work ends.",
-    ],
   },
 ];
 
@@ -98,6 +81,9 @@ const BIGGER_PICTURE = [
 export default function KilnPage() {
   return (
     <ProjectShell title="THE KILN">
+      <div className="mb-10 md:mb-12">
+        <AtelierKilnThread current="kiln" />
+      </div>
       <CaseStudySection label="Introduction">
         <CaseStudyProse paragraphs={INTRO} />
       </CaseStudySection>
@@ -123,9 +109,6 @@ export default function KilnPage() {
                   <p key={p.slice(0, 48)}>{p}</p>
                 ))}
               </div>
-              <p className="mt-5 text-sm text-[var(--color-fg-subtle)] leading-relaxed">
-                Submit a real idea. The Evaluator runs the same stress-test it runs on mine.
-              </p>
             </div>
             <div className="min-w-0 w-full">
               <EvaluatorChat />
