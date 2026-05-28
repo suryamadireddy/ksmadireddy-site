@@ -6,7 +6,7 @@ const scrollDeckCardGrid =
 export type CaseStudyCardItem = {
   title: string;
   paragraphs: string[];
-  image: { src: string; alt: string; placeholderLabel: string };
+  image?: { src: string; alt: string; placeholderLabel: string };
 };
 
 type CaseStudyScrollDeckProps = {
@@ -44,7 +44,7 @@ function CaseStudyHorizontalCard({
   image,
 }: CaseStudyCardItem) {
   return (
-    <article className={scrollDeckCardGrid}>
+    <article className={image ? scrollDeckCardGrid : "grid grid-cols-1 items-start"}>
       <div className="min-w-0">
         <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-[var(--color-fg)]">
           {title}
@@ -55,14 +55,16 @@ function CaseStudyHorizontalCard({
           ))}
         </div>
       </div>
-      <div className="min-w-0 w-full">
-        <CaseStudyImage
-          src={image.src}
-          alt={image.alt}
-          placeholderLabel={image.placeholderLabel}
-          compact
-        />
-      </div>
+      {image ? (
+        <div className="min-w-0 w-full">
+          <CaseStudyImage
+            src={image.src}
+            alt={image.alt}
+            placeholderLabel={image.placeholderLabel}
+            compact
+          />
+        </div>
+      ) : null}
     </article>
   );
 }

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { CaseStudyScrollDeck } from "@/app/components/project/CaseStudyScrollDeck";
+import { CaseStudyImage } from "@/app/components/project/CaseStudyImage";
 import {
   CaseStudyProse,
   CaseStudySection,
 } from "@/app/components/project/ProjectCaseStudy";
 import KilnRunDemo from "@/app/kiln/KilnRunDemo";
 import { ProjectShell } from "@/app/components/project/ProjectShell";
+import EvaluatorChat from "@/app/components/kiln/EvaluatorChat";
 
 export const metadata: Metadata = {
   title: "The Kiln | Krishna Surya Madireddy",
@@ -19,36 +20,28 @@ const GEONEWS_EXHIBIT = "https://ksmstudio.vercel.app/projects/geonews";
 const linkClassName =
   "text-base md:text-lg font-medium text-[var(--color-fg)] underline decoration-1 decoration-[var(--color-border-strong)] underline-offset-[6px] hover:decoration-[var(--color-fg)] transition-[text-decoration-color] duration-200";
 
+const PIPELINE_GRID =
+  "grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[minmax(0,32rem)_minmax(0,1fr)] xl:gap-12";
+
 const INTRO = [
-  "The Kiln is a pipeline that takes a raw idea and fires it through three stages — interrogation, research, and specification — until it becomes a builder brief precise enough to hand straight to a build tool. Each stage is an agent with one job.",
-  "I built it because the slowest and least reliable part of building things is the stretch between having an idea and having something a team can actually build. The Kiln is my attempt to make that stretch fast, rigorous, and repeatable — and to be harder on my own ideas than I manage to be on my own.",
-  "Three phases run today and have produced real work. Two more — a Builder and a Deployer that would carry a brief all the way to shipped software — are designed but not yet built. This page is honest about both.",
+  "The Kiln is an agentic pipeline that turns a raw idea into a builder brief precise enough to hand straight to a build tool.",
+  "I built it because the stretch between having an idea and having something myself ora team can actually build is the slowest and least reliable part of the process. My attempt to make that stretch fast, rigorous, and repeatable. And to be harder on my own ideas than I manage to be on my own.",
 ];
 
-const PIPELINE = [
-  {
-    title: "Evaluator",
-    paragraphs: [
-      "The Evaluator is Kiln’s Socratic stress test: adversarial by design, but in service of sharper ideas. It challenges the idea across six dimensions: clarity, impact, effort, falsifiability, founder fit, and viability, looking for its weakest links.",
-      "Each run is scored and saved. When the idea returns, the Evaluator runs the same test again. The delta shows what actually improved, what stayed fragile, and whether the reasoning got stronger or only the language did.",
-    ],
-    image: {
-      src: "/work/kiln/evaluator.png",
-      alt: "The Evaluator — Socratic stress-test of an idea",
-      placeholderLabel: "public/work/kiln/evaluator.png",
-    },
-  },
+const EVALUATOR = {
+  title: "Evaluator",
+  paragraphs: [
+    "The Evaluator is Kiln's Socratic stress test: adversarial by design, but in service of sharper ideas. It challenges the idea across six dimensions: clarity, impact, effort, falsifiability, founder fit, and viability, looking for its weakest links.",
+    "Each run is scored and saved. When the idea returns, the Evaluator runs the same test again. The delta shows what actually improved, what stayed fragile, and whether the reasoning got stronger or only the language did.",
+  ],
+};
+
+const PIPELINE_REST = [
   {
     title: "Researcher",
     paragraphs: [
-      "Once an idea clears the Evaluator, the Researcher grounds it in evidence. It pulls from market research, competitors, and user signals to build the foundation for the rest of the pipeline.",
-      "It is constructive, not confirmatory — strengthening what the evidence supports and challenging what it does not.",
+      "Once an idea clears the Evaluator, the Researcher grounds it in evidence. It pulls from market research, competitors, and user signals to build the foundation for the rest of the pipeline. It is constructive, not confirmatory - strengthening what the evidence supports and challenging what it does not.",
     ],
-    image: {
-      src: "/work/kiln/researcher.png",
-      alt: "The Researcher — grounding the idea in market and product research",
-      placeholderLabel: "public/work/kiln/researcher.png",
-    },
   },
   {
     title: "Artifact Creator",
@@ -77,13 +70,8 @@ const PIPELINE = [
   {
     title: "Deployer",
     paragraphs: [
-      "The Deployer stands up a repository from the chosen prototype and hands it to an IDE like Cursor. The point where Kiln's work ends and real engineering begins.",
+      "The Deployer stands up a repository from the chosen prototype and hands it to an IDE like Cursor. The point where Kiln's work ends.",
     ],
-    image: {
-      src: "/work/kiln/deployer.png",
-      alt: "The Deployer — repository and handoff to an IDE",
-      placeholderLabel: "public/work/kiln/deployer.png",
-    },
   },
 ];
 
@@ -114,11 +102,66 @@ export default function KilnPage() {
         <CaseStudyProse paragraphs={INTRO} />
       </CaseStudySection>
 
-      <CaseStudyScrollDeck
-        items={PIPELINE}
-        deckId="pipeline"
-        deckLabel="The Pipeline"
-      />
+      {/* Pipeline section — Evaluator renders live chat; rest render static images */}
+      <section
+        id="pipeline"
+        aria-label="The Pipeline section"
+        className="case-study-section-rail"
+      >
+        <header className="case-study-deck-header mb-6">
+          <span className="label case-study-section-label">The Pipeline</span>
+        </header>
+        <div className="space-y-16 md:space-y-24">
+          {/* Evaluator — EvaluatorChat replaces the static image */}
+          <article className={PIPELINE_GRID}>
+            <div className="min-w-0">
+              <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-[var(--color-fg)]">
+                {EVALUATOR.title}
+              </h3>
+              <div className="mt-4 md:mt-6 space-y-3 text-base md:text-lg leading-relaxed text-[var(--color-fg-muted)]">
+                {EVALUATOR.paragraphs.map((p) => (
+                  <p key={p.slice(0, 48)}>{p}</p>
+                ))}
+              </div>
+              <p className="mt-5 text-sm text-[var(--color-fg-subtle)] leading-relaxed">
+                Submit a real idea. The Evaluator runs the same stress-test it runs on mine.
+              </p>
+            </div>
+            <div className="min-w-0 w-full">
+              <EvaluatorChat />
+            </div>
+          </article>
+
+          {/* Researcher, Artifact Creator, Builder, Deployer */}
+          {PIPELINE_REST.map((item) => (
+            <article
+              key={item.title}
+              className={item.image ? PIPELINE_GRID : "grid grid-cols-1 items-start"}
+            >
+              <div className="min-w-0">
+                <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-[var(--color-fg)]">
+                  {item.title}
+                </h3>
+                <div className="mt-4 md:mt-6 space-y-3 text-base md:text-lg leading-relaxed text-[var(--color-fg-muted)]">
+                  {item.paragraphs.map((p) => (
+                    <p key={p.slice(0, 48)}>{p}</p>
+                  ))}
+                </div>
+              </div>
+              {item.image ? (
+                <div className="min-w-0 w-full">
+                  <CaseStudyImage
+                    src={item.image.src}
+                    alt={item.image.alt}
+                    placeholderLabel={item.image.placeholderLabel}
+                    compact
+                  />
+                </div>
+              ) : null}
+            </article>
+          ))}
+        </div>
+      </section>
 
       <CaseStudySection
         label="Demo"
@@ -129,8 +172,6 @@ export default function KilnPage() {
           <KilnRunDemo />
         </div>
       </CaseStudySection>
-
-      {/* Future: CaseStudySection "Talk to the Evaluator" — live evaluator-only demo */}
 
       <CaseStudySection label="Worked example">
         <CaseStudyProse paragraphs={WORKED_EXAMPLE} />
