@@ -62,6 +62,29 @@ const PIPELINE = [
       placeholderLabel: "public/work/kiln/artifact-creator.png",
     },
   },
+  {
+    title: "Builder",
+    paragraphs: [
+      "Would take the finished brief and turn it into four prototype directions, each one a visual tile, a different reading of the same MVP. Select one, blend two, or fine-tune from there.",
+      "The brief stops being something you read and becomes something you can see and react to.",
+    ],
+    image: {
+      src: "/work/kiln/builder.png",
+      alt: "The Builder — four prototype directions from the finished brief",
+      placeholderLabel: "public/work/kiln/builder.png",
+    },
+  },
+  {
+    title: "Deployer",
+    paragraphs: [
+      "The Deployer stands up a repository from the chosen prototype and hands it to an IDE like Cursor. The point where Kiln's work ends and real engineering begins.",
+    ],
+    image: {
+      src: "/work/kiln/deployer.png",
+      alt: "The Deployer — repository and handoff to an IDE",
+      placeholderLabel: "public/work/kiln/deployer.png",
+    },
+  },
 ];
 
 const DEMO = [

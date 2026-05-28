@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 const INTRO = [
   "Atlas isn't built yet. What follows is the working spec: the document I'd hand a team on day one. It's posted because the thinking behind a product is its own kind of artifact, and because the path that led here, from Globetrotter to Meridian to Atlas, is worth following in full.",
   "Atlas is a queryable interface of how the world works. A spatial-knowledge interface where curious people can land on a globe and explore using natural language (“show me cobalt mines,” “show me the Silk Road in 200 CE,” “show me species ranges in Borneo”) and get beautiful, accurate, on-globe visualizations with concise sourced context.",
-  "Atlas is forked from Meridian, which remains the news-visualization product. Atlas inherits Meridian’s technical patterns but has its own codebase, identity, and content. News is not a layer in Atlas — that’s Meridian’s job. Atlas is evergreen.",
+  "Atlas is forked from Meridian, which remains the news-visualization product. Atlas inherits Meridian’s technical patterns but has its own codebase, identity, and content. News is not a layer in Atlas — that’s Meridian’s job.",
   "Mental model: Google Earth used like Google. A beautiful globe; a query bar that turns natural language into the right visualization, layered over real data.",
 ];
 
