@@ -6,7 +6,11 @@ import { ArchitectureDiagram } from "./ArchitectureDiagram";
 import { FourFormsFan } from "./FourFormsFan";
 import { MeridianWorkedExample } from "./MeridianWorkedExample";
 import { TemperamentsRow } from "./TemperamentsRow";
+import EvaluatorChat from "./kiln/EvaluatorChat";
 import type { NodeId } from "./atelierArchitectureData";
+
+const inlineLinkClass =
+  "text-base md:text-lg font-medium text-[var(--color-fg)] underline decoration-1 decoration-[var(--color-border-strong)] underline-offset-[6px] hover:decoration-[var(--color-fg)] transition-[text-decoration-color] duration-200";
 
 // All prose is verbatim from docs/ATELIER_PAGE_COPY.md (v2, canonical, June 10 2026).
 
@@ -53,6 +57,7 @@ const CLOSING_GESTURE = [
 
 export function AtelierPageContent() {
   const [selectedId, setSelectedId] = useState<NodeId | null>(null);
+  const [kilnOpen, setKilnOpen] = useState(false);
 
   const handleSelect = useCallback((id: NodeId) => {
     setSelectedId(id);
@@ -107,6 +112,21 @@ export function AtelierPageContent() {
             <div className="mt-4">
               <CaseStudyProse paragraphs={JUDGMENT} />
             </div>
+            <p className="mt-5">
+              <button
+                type="button"
+                onClick={() => setKilnOpen((open) => !open)}
+                aria-expanded={kilnOpen}
+                className={inlineLinkClass}
+              >
+                The Kiln is live — put an idea through it.
+              </button>
+            </p>
+            {kilnOpen ? (
+              <div className="kiln-reveal mt-6">
+                <EvaluatorChat />
+              </div>
+            ) : null}
           </div>
           <div>
             <h3 className="font-serif text-xl md:text-2xl tracking-[-0.01em] text-[var(--color-fg)]">
@@ -168,6 +188,25 @@ export function AtelierPageContent() {
       <section id="closing" className="mt-12 md:mt-16">
         <CaseStudyProse paragraphs={CLOSING_GESTURE} />
       </section>
+
+      <style jsx>{`
+        .kiln-reveal {
+          animation: kilnRevealIn 320ms ease both;
+        }
+        @keyframes kilnRevealIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .kiln-reveal {
+            animation: none;
+          }
+        }
+      `}</style>
     </>
   );
 }
