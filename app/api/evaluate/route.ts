@@ -1,9 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import type { NextRequest } from "next/server";
-
-const rateMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT = 20;
-const RATE_WINDOW = 60 * 60 * 1000;
+import { checkRateLimit } from "@/lib/rate-limit";
 
 const SYSTEM_PROMPT = `You are a Socratic evaluator: a rigorous, adversarial thinker whose job is to find an idea's weakest points before any work begins. You are not trying to kill ideas — you are trying to make survivors stronger.
 
@@ -57,28 +54,23 @@ const COMPLETE_TOOL: Anthropic.Tool = {
   },
 };
 
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const record = rateMap.get(ip);
-  if (!record || now >= record.resetAt) {
-    rateMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW });
-    return true;
-  }
-  if (record.count >= RATE_LIMIT) return false;
-  record.count++;
-  return true;
-}
-
 export async function POST(req: NextRequest) {
   const ip =
     req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
     req.headers.get("x-real-ip") ??
     "unknown";
 
-  if (!checkRateLimit(ip)) {
+  const rate = await checkRateLimit(ip);
+  // Surfaces which backend served the decision: "true" = Upstash (durable,
+  // cross-instance), "false" = in-memory fallback (not configured / Redis down).
+  const durableHeader = String(rate.durable);
+  if (!rate.ok) {
     return new Response(JSON.stringify({ error: "Rate limit exceeded. Try again later." }), {
       status: 429,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-ratelimit-durable": durableHeader,
+      },
     });
   }
 
@@ -160,6 +152,7 @@ export async function POST(req: NextRequest) {
       "Content-Type": "text/plain; charset=utf-8",
       "X-Accel-Buffering": "no",
       "Cache-Control": "no-cache",
+      "x-ratelimit-durable": durableHeader,
     },
   });
 }
