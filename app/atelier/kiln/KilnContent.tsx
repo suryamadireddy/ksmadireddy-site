@@ -1,19 +1,13 @@
-import type { Metadata } from "next";
 import { CaseStudyImage } from "@/app/components/project/CaseStudyImage";
 import {
   CaseStudyProse,
   CaseStudySection,
 } from "@/app/components/project/ProjectCaseStudy";
-import KilnRunDemo from "@/app/kiln/KilnRunDemo";
-import { ProjectShell } from "@/app/components/project/ProjectShell";
-import EvaluatorChat from "@/app/components/kiln/EvaluatorChat";
-import { AtelierKilnThread } from "@/app/components/project/AtelierKilnThread";
+import KilnRunDemo from "./KilnRunDemo";
+import EvaluatorChat from "./EvaluatorChat";
 
-export const metadata: Metadata = {
-  title: "The Kiln | Krishna Surya Madireddy",
-  description:
-    "A three-phase agentic pipeline that fires a raw idea into a build-ready brief.",
-};
+/* The body of the Kiln case study — renders inside the Kiln tab of the
+ * Atelier. Page chrome (shell, nav) stays with the caller. */
 
 const MERIDIAN_PAGE = "/meridian";
 const GEONEWS_EXHIBIT = "https://ksmstudio.vercel.app/projects/geonews";
@@ -25,8 +19,8 @@ const PIPELINE_GRID =
   "grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[minmax(0,32rem)_minmax(0,1fr)] xl:gap-12";
 
 const INTRO = [
-  "The Kiln is a pipeline that turns a raw idea into a builder brief precise enough to hand straight to a build tool.",
-  "I built it because the stretch between having an idea and having something a team can actually build is the slowest and least reliable part of the process. My attempt to make that stretch fast, rigorous, and repeatable. And to be harder on my own ideas than I manage to be on my own.",
+  "When an idea is ready to be taken seriously, it goes through the Kiln. The Kiln is adversarial on purpose. Its first agent, the Evaluator, plays devil's advocate across six dimensions and tries to find where the idea breaks — because most ideas should break, and the expensive mistake is being gentle with them.",
+  "The ones that survive get grounded in research and turned into a real brief. The ones that don't are stopped before the system spends another minute on them.",
 ];
 
 const EVALUATOR = {
@@ -78,12 +72,9 @@ const BIGGER_PICTURE = [
   "The Kiln is also one capability of something larger. The long-term goal is a personal Jarvis — an AI layer that compounds one person's ability to go from idea to built work. The Kiln is the part I built first, because turning ideas into reality is the bottleneck everything else depends on.",
 ];
 
-export default function KilnPage() {
+export function KilnContent() {
   return (
-    <ProjectShell title="THE KILN">
-      <div className="mb-10 md:mb-12">
-        <AtelierKilnThread current="kiln" />
-      </div>
+    <>
       <CaseStudySection label="Introduction">
         <CaseStudyProse paragraphs={INTRO} />
       </CaseStudySection>
@@ -115,7 +106,7 @@ export default function KilnPage() {
             </div>
           </article>
 
-          {/* Researcher, Artifact Creator, Builder, Deployer */}
+          {/* Researcher, Artifact Creator */}
           {PIPELINE_REST.map((item) => (
             <article
               key={item.title}
@@ -182,6 +173,6 @@ export default function KilnPage() {
       <CaseStudySection label="The bigger picture">
         <CaseStudyProse paragraphs={BIGGER_PICTURE} />
       </CaseStudySection>
-    </ProjectShell>
+    </>
   );
 }

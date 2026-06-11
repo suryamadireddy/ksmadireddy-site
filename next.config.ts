@@ -36,12 +36,22 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/thekiln",
-        destination: "/kiln",
+        destination: "/atelier",
         permanent: true,
       },
       {
         source: "/thekiln/:path*",
-        destination: "/kiln/:path*",
+        destination: "/atelier",
+        permanent: true,
+      },
+      {
+        source: "/kiln",
+        destination: "/atelier",
+        permanent: true,
+      },
+      {
+        source: "/kiln/:path*",
+        destination: "/atelier",
         permanent: true,
       },
     ];

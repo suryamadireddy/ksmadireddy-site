@@ -1,11 +1,10 @@
 "use client";
 
 /**
- * KilnRunDemo — the "See it run" demo for the /kiln page.
+ * KilnRunDemo — the "See it run" demo for the Kiln case study on /atelier.
  *
  * Self-contained. No backend, no API calls. All content is canned.
- * Drop it into your Next.js app and render <KilnRunDemo /> inside the
- * "See it run" section.
+ * Rendered from KilnContent when the Kiln room is selected.
  *
  * Styling lives in the STYLE BLOCK below — every value is driven by a
  * CSS variable defined under `.kiln-demo`. Override those variables
