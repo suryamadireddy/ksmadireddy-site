@@ -117,7 +117,7 @@ export function AtelierPageContent() {
                 type="button"
                 onClick={() => setKilnOpen((open) => !open)}
                 aria-expanded={kilnOpen}
-                className={inlineLinkClass}
+                className={`${inlineLinkClass} inline-block py-2 -my-2`}
               >
                 The Kiln is live — put an idea through it.
               </button>

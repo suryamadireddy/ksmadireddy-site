@@ -6,7 +6,7 @@ export const projects: ProjectDefinition[] = [
     card: {
       title: "Atelier",
       tagline:
-        "A studio that judges raw ideas, builds the good ones, and throws away the rest.",
+        "A studio that knows me well enough to be a real creative partner — one that judges not just which ideas are worth making, but how each deserves to be shown.",
       mediaHref: "/atelier",
       image: {
         src: "/work/kiln.svg",

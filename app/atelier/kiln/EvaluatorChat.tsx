@@ -300,7 +300,7 @@ export default function EvaluatorChat() {
                 isComplete ? "Session complete" : "Describe your idea…"
               }
               rows={1}
-              className="flex-1 resize-none rounded border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-sm leading-relaxed text-[var(--color-fg)] placeholder:text-[var(--color-fg-subtle)] focus:outline-none focus:border-[var(--color-border-strong)] disabled:opacity-40 disabled:cursor-not-allowed"
+              className="flex-1 resize-none rounded border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-base sm:text-sm leading-relaxed text-[var(--color-fg)] placeholder:text-[var(--color-fg-subtle)] focus:outline-none focus:border-[var(--color-border-strong)] disabled:opacity-40 disabled:cursor-not-allowed"
               style={{ maxHeight: "120px", overflowY: "auto" }}
             />
             <button
