@@ -13,6 +13,7 @@ coverage
 
 # next.js
 .next
+.next 2
 out
 build
 dist

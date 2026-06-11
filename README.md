@@ -43,7 +43,7 @@ Each project gets a route under `app/`. The current set:
 
 - `app/aboutme/page.tsx`
 - `app/dreamspace/page.tsx`
-- `app/kiln/page.tsx` — legacy `/ksm-studio` and `/thekiln` redirect to `/kiln`
+- `app/atelier/page.tsx` — Atelier studio page; Kiln case study lives here. Legacy `/kiln`, `/ksm-studio`, and `/thekiln` redirect to `/atelier` (see `next.config.ts`).
 - `app/meridian/page.tsx` — plus **`app/meridian/layout.tsx`**, which wraps Globetrotter, Meridian, and Atlas in one shell (`Globetrotter` and `Atlas` live at `app/meridian/globetrotter/page.tsx` and `app/meridian/atlas/page.tsx`). Legacy `/atlas` and `/globetrotter` URLs redirect to `/meridian/atlas` and `/meridian/globetrotter`.
 - `app/placemaking/page.tsx`
 
@@ -58,6 +58,10 @@ Pages share a small set of case-study primitives from `app/components/project/`:
 - **`ProjectEmbed`** — sized iframe for live previews. Used by Meridian.
 
 Each page co-locates its own `metadata` export.
+
+### Docs (`docs/`)
+
+Markdown specs only (not imported at build time). See [`docs/README.md`](docs/README.md). Portfolio routes live under `app/<slug>/`; shared primitives under `app/components/project/`. Large pages (e.g. Atelier) co-locate UI next to `page.tsx` under the same route folder.
 
 ### Components (`app/components/`)
 

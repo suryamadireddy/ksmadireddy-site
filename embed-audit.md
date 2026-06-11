@@ -2,7 +2,7 @@
 
 ## 1. EvaluatorChat component
 
-**Exists:** yes — `app/components/kiln/EvaluatorChat.tsx`
+**Exists:** yes — `app/atelier/kiln/EvaluatorChat.tsx`
 
 What it does:
 - Client component (`"use client"`) that renders a 500 px fixed-height chat container.
@@ -13,7 +13,7 @@ What it does:
 - Streams NDJSON lines from the route and appends text deltas in real time; shows a three-dot `TypingIndicator` while waiting for the first token.
 
 **Where it is imported:**
-- `app/components/kiln/EvaluatorChat.tsx:75` — `export default function EvaluatorChat()`
+- `app/atelier/kiln/EvaluatorChat.tsx:75` — `export default function EvaluatorChat()`
 - `app/kiln/page.tsx` — **not imported**. The import was removed in the most recent commit (see §4). The only reference is a stale comment on line 97:
   ```
   {/* Evaluator — EvaluatorChat replaces the static image */}

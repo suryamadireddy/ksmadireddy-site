@@ -1,5 +1,7 @@
 # Atlas — Project Spec (final)
 
+> **Location:** `docs/atlas-spec.md` — product spec only; not imported by the app. Portfolio case study: `app/meridian/atlas/page.tsx` (`/meridian/atlas`).
+
 ## What we're building
 
 Atlas is a queryable atlas of how the world works. A spatial-knowledge interface where curious people land on a globe and explore — by querying in natural language ("show me cobalt mines," "show me the Silk Road in 200 CE," "show me species ranges in Borneo") and getting beautiful, accurate, on-globe visualizations with concise sourced context.
